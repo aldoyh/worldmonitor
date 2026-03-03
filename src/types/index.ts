@@ -549,10 +549,6 @@ export interface MapLayers {
   tradeRoutes: boolean;
   // Iran attacks layer
   iranAttacks: boolean;
-  // GPS/GNSS interference layer
-  gpsJamming: boolean;
-  // Overlay layers
-  dayNight: boolean;
 }
 
 export interface AIDataCenter {

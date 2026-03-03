@@ -209,13 +209,12 @@ export async function geoSearchByBox(
       method: 'POST',
       headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
       body: JSON.stringify(pipeline),
-      signal: AbortSignal.timeout(REDIS_PIPELINE_TIMEOUT_MS),
+      signal: AbortSignal.timeout(5_000),
     });
     if (!resp.ok) return [];
     const data = (await resp.json()) as Array<{ result?: string[] }>;
     return data[0]?.result ?? [];
-  } catch (err) {
-    console.warn('[redis] geoSearchByBox failed:', errMsg(err));
+  } catch {
     return [];
   }
 }
@@ -235,7 +234,7 @@ export async function getHashFieldsBatch(
       method: 'POST',
       headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
       body: JSON.stringify(pipeline),
-      signal: AbortSignal.timeout(REDIS_PIPELINE_TIMEOUT_MS),
+      signal: AbortSignal.timeout(5_000),
     });
     if (!resp.ok) return result;
     const data = (await resp.json()) as Array<{ result?: (string | null)[] }>;
@@ -245,8 +244,6 @@ export async function getHashFieldsBatch(
         if (values[i]) result.set(fields[i]!, values[i]!);
       }
     }
-  } catch (err) {
-    console.warn('[redis] getHashFieldsBatch failed:', errMsg(err));
-  }
+  } catch { /* best-effort */ }
   return result;
 }

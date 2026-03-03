@@ -534,14 +534,6 @@ export class StrategicRiskPanel extends Panel {
   }
 
   public destroy(): void {
-    if (this.boundOnBreaking) {
-      document.removeEventListener('wm:breaking-news', this.boundOnBreaking);
-      this.boundOnBreaking = null;
-    }
-    if (this.breakingExpiryTimer) {
-      clearTimeout(this.breakingExpiryTimer);
-      this.breakingExpiryTimer = null;
-    }
     if (this.unsubscribeFreshness) {
       this.unsubscribeFreshness();
     }

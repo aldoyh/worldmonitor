@@ -114,52 +114,7 @@ Sentry.init({
     /AbortError: The user aborted a request/,
     /\w+ is not a function.*\/uv\/service\//,
     /__isInQueue__/,
-    /^(?:LIDNotify(?:Id)?|onWebViewAppeared|onGetWiFiBSSID) is not defined$/,
-    /signal timed out/,
-    /Se requiere plan premium/,
-    /hybridExecute is not defined/,
-    /reading 'postMessage'/,
-    /NotSupportedError/,
-    /appendChild.*Unexpected token/,
-    /\bmag is not defined\b/,
-    /evaluating '[^']*\.luma/,
-    /translateNotifyError/,
-    /GM_getValue/,
-    /^InvalidStateError:|The object is in an invalid state/,
-    /Could not establish connection\. Receiving end does not exist/,
-    /webkitCurrentPlaybackTargetIsWireless/,
-    /webkit(?:Supports)?PresentationMode/,
-    /Cannot redefine property: webdriver/,
-    /null is not an object \(evaluating '\w+\.theme'\)/,
-    /this\.player\.\w+ is not a function/,
-    /videoTrack\.configuration/,
-    /evaluating 'v\.setProps'/,
-    /button\[aria-label/,
-    /The fetching process for the media resource was aborted/,
-    /Invalid regular expression: missing/,
-    /WeixinJSBridge/,
-    /evaluating 'e\.type'/,
-    /Policy with name .* already exists/,
-    /[sx]wbrowser is not defined/,
-    /browser\.storage\.local/,
-    /The play\(\) request was interrupted/,
-    /MutationEvent is not defined/,
-    /Cannot redefine property: userAgent/,
-    /st_framedeep|ucbrowser_script/,
-    /iabjs_unified_bridge/,
-    /DarkReader/,
-    /window\.receiveMessage/,
-    /Cross-origin script load denied/,
-    /orgSetInterval is not a function/,
-    /Blocked a frame with origin.*accessing a cross-origin frame/,
-    /SnapTube/,
-    /sortedTrackListForMenu/,
-    /isWhiteToBlack/,
-    /window\.videoSniffer/,
-    /closeTabMediaModal/,
-    /missing \) after argument list/,
-    /Error invoking postMessage: Java exception/,
-    /IndexSizeError/,
+    /^(?:LIDNotifyId|onWebViewAppeared|onGetWiFiBSSID) is not defined$/,
   ],
   beforeSend(event) {
     const msg = event.exception?.values?.[0]?.value ?? '';
@@ -212,7 +167,10 @@ initMetaTags();
 installRuntimeFetchPatch();
 // In web production, route RPC calls through api.worldmonitor.app (Cloudflare edge).
 installWebApiRedirect();
-loadDesktopSecrets().catch(() => {});
+loadDesktopSecrets().then(async () => {
+  await initAnalytics();
+  trackApiKeysSnapshot();
+}).catch(() => {});
 
 // Apply stored theme preference before app initialization (safety net for inline script)
 applyStoredTheme();

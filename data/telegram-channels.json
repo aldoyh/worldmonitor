@@ -23,6 +23,15 @@
         "maxMessages": 25
       },
       {
+        "handle": "air_alert_ua",
+        "label": "Повітряна Тривога",
+        "topic": "alerts",
+        "tier": 2,
+        "enabled": true,
+        "region": "ukraine",
+        "maxMessages": 20
+      },
+      {
         "handle": "AuroraIntel",
         "label": "Aurora Intel",
         "topic": "conflict",
@@ -77,7 +86,7 @@
         "maxMessages": 25
       },
       {
-        "handle": "iranintltv",
+        "handle": "IranIntl",
         "label": "Iran International",
         "topic": "politics",
         "tier": 2,
@@ -167,6 +176,42 @@
         "maxMessages": 15
       },
       {
+        "handle": "nexta_live",
+        "label": "NEXTA Live",
+        "topic": "breaking",
+        "tier": 3,
+        "enabled": true,
+        "region": "global",
+        "maxMessages": 15
+      },
+      {
+        "handle": "GeopoliticalCenter",
+        "label": "GeopoliticalCenter",
+        "topic": "geopolitics",
+        "tier": 3,
+        "enabled": true,
+        "region": "global",
+        "maxMessages": 20
+      },
+      {
+        "handle": "Middle_East_Spectator",
+        "label": "Middle East Spectator",
+        "topic": "middleeast",
+        "tier": 3,
+        "enabled": true,
+        "region": "middleeast",
+        "maxMessages": 20
+      },
+      {
+        "handle": "MiddleEastNow_Breaking",
+        "label": "Middle East Now Breaking",
+        "topic": "middleeast",
+        "tier": 3,
+        "enabled": true,
+        "region": "middleeast",
+        "maxMessages": 15
+      },
+      {
         "handle": "nexta_tv",
         "label": "NEXTA",
         "topic": "politics",
@@ -214,15 +259,6 @@
       {
         "handle": "spectatorindex",
         "label": "The Spectator Index",
-        "topic": "breaking",
-        "tier": 3,
-        "enabled": true,
-        "region": "global",
-        "maxMessages": 15
-      },
-      {
-        "handle": "wfwitness",
-        "label": "Witness",
         "topic": "breaking",
         "tier": 3,
         "enabled": true,

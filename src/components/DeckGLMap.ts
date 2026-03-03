@@ -38,7 +38,6 @@ import type {
 import { fetchMilitaryBases, type MilitaryBaseCluster as ServerBaseCluster } from '@/services/military-bases';
 import type { AirportDelayAlert } from '@/services/aviation';
 import type { IranEvent } from '@/services/conflict';
-import type { GpsJamHex } from '@/services/gps-interference';
 import type { DisplacementFlow } from '@/services/displacement';
 import type { Earthquake } from '@/services/earthquakes';
 import type { ClimateAnomaly } from '@/services/climate';
@@ -367,9 +366,9 @@ export class DeckGLMap {
   private lastCableHighlightSignature = '';
   private lastCableHealthSignature = '';
   private lastPipelineHighlightSignature = '';
-  private debouncedRebuildLayers: (() => void) & { cancel(): void };
-  private debouncedFetchBases: (() => void) & { cancel(): void };
-  private rafUpdateLayers: (() => void) & { cancel(): void };
+  private debouncedRebuildLayers: () => void;
+  private debouncedFetchBases: () => void;
+  private rafUpdateLayers: () => void;
   private moveTimeoutId: ReturnType<typeof setTimeout> | null = null;
 
   constructor(container: HTMLElement, initialState: DeckMapState) {
@@ -541,8 +540,6 @@ export class DeckGLMap {
       this.lastSCZoom = -1;
       this.rafUpdateLayers();
       this.debouncedFetchBases();
-      this.state.zoom = this.maplibreMap?.getZoom() ?? this.state.zoom;
-      this.onStateChange?.(this.state);
     });
 
     this.maplibreMap.on('move', () => {
@@ -1071,10 +1068,12 @@ export class DeckGLMap {
       layers.push(this.createConflictZonesLayer());
     }
 
-    // Military bases layer — hidden at low zoom (E: progressive disclosure) + clusters
+    // Military bases layer — hidden at low zoom (E: progressive disclosure) + ghost + clusters
     if (mapLayers.bases && this.isLayerVisible('bases')) {
       layers.push(this.createBasesLayer());
       layers.push(...this.createBasesClusterLayer());
+      const basesData = this.getBasesData();
+      layers.push(this.createGhostLayer('bases-layer', basesData, d => [d.lon, d.lat], { radiusMinPixels: 12 }));
     }
     layers.push(this.createEmptyGhost('bases-layer'));
 
@@ -3268,44 +3267,42 @@ export class DeckGLMap {
           { key: 'cyberThreats', label: t('components.deckgl.layers.cyberThreats'), icon: '&#128737;' },
           { key: 'dayNight', label: t('components.deckgl.layers.dayNight'), icon: '&#127763;' },
         ]
-        : SITE_VARIANT === 'happy'
-          ? [
-            { key: 'positiveEvents', label: 'Positive Events', icon: '&#127775;' },
-            { key: 'kindness', label: 'Acts of Kindness', icon: '&#128154;' },
-            { key: 'happiness', label: 'World Happiness', icon: '&#128522;' },
-            { key: 'speciesRecovery', label: 'Species Recovery', icon: '&#128062;' },
-            { key: 'renewableInstallations', label: 'Clean Energy', icon: '&#9889;' },
-          ]
-          : [
-            { key: 'iranAttacks', label: t('components.deckgl.layers.iranAttacks'), icon: '&#127919;' },
-            { key: 'hotspots', label: t('components.deckgl.layers.intelHotspots'), icon: '&#127919;' },
-            { key: 'conflicts', label: t('components.deckgl.layers.conflictZones'), icon: '&#9876;' },
-            { key: 'bases', label: t('components.deckgl.layers.militaryBases'), icon: '&#127963;' },
-            { key: 'nuclear', label: t('components.deckgl.layers.nuclearSites'), icon: '&#9762;' },
-            { key: 'irradiators', label: t('components.deckgl.layers.gammaIrradiators'), icon: '&#9888;' },
-            { key: 'spaceports', label: t('components.deckgl.layers.spaceports'), icon: '&#128640;' },
-            { key: 'cables', label: t('components.deckgl.layers.underseaCables'), icon: '&#128268;' },
-            { key: 'pipelines', label: t('components.deckgl.layers.pipelines'), icon: '&#128738;' },
-            { key: 'datacenters', label: t('components.deckgl.layers.aiDataCenters'), icon: '&#128421;' },
-            { key: 'military', label: t('components.deckgl.layers.militaryActivity'), icon: '&#9992;' },
-            { key: 'ais', label: t('components.deckgl.layers.shipTraffic'), icon: '&#128674;' },
-            { key: 'tradeRoutes', label: t('components.deckgl.layers.tradeRoutes'), icon: '&#9875;' },
-            { key: 'flights', label: t('components.deckgl.layers.flightDelays'), icon: '&#9992;' },
-            { key: 'protests', label: t('components.deckgl.layers.protests'), icon: '&#128226;' },
-            { key: 'ucdpEvents', label: t('components.deckgl.layers.ucdpEvents'), icon: '&#9876;' },
-            { key: 'displacement', label: t('components.deckgl.layers.displacementFlows'), icon: '&#128101;' },
-            { key: 'climate', label: t('components.deckgl.layers.climateAnomalies'), icon: '&#127787;' },
-            { key: 'weather', label: t('components.deckgl.layers.weatherAlerts'), icon: '&#9928;' },
-            { key: 'outages', label: t('components.deckgl.layers.internetOutages'), icon: '&#128225;' },
-            { key: 'cyberThreats', label: t('components.deckgl.layers.cyberThreats'), icon: '&#128737;' },
-            { key: 'natural', label: t('components.deckgl.layers.naturalEvents'), icon: '&#127755;' },
-            { key: 'fires', label: t('components.deckgl.layers.fires'), icon: '&#128293;' },
-            { key: 'waterways', label: t('components.deckgl.layers.strategicWaterways'), icon: '&#9875;' },
-            { key: 'economic', label: t('components.deckgl.layers.economicCenters'), icon: '&#128176;' },
-            { key: 'minerals', label: t('components.deckgl.layers.criticalMinerals'), icon: '&#128142;' },
-            { key: 'gpsJamming', label: t('components.deckgl.layers.gpsJamming'), icon: '&#128225;' },
-            { key: 'dayNight', label: t('components.deckgl.layers.dayNight'), icon: '&#127763;' },
-          ];
+      : SITE_VARIANT === 'happy'
+      ? [
+          { key: 'positiveEvents', label: 'Positive Events', icon: '&#127775;' },
+          { key: 'kindness', label: 'Acts of Kindness', icon: '&#128154;' },
+          { key: 'happiness', label: 'World Happiness', icon: '&#128522;' },
+          { key: 'speciesRecovery', label: 'Species Recovery', icon: '&#128062;' },
+          { key: 'renewableInstallations', label: 'Clean Energy', icon: '&#9889;' },
+        ]
+      : [
+        { key: 'hotspots', label: t('components.deckgl.layers.intelHotspots'), icon: '&#127919;' },
+        { key: 'conflicts', label: t('components.deckgl.layers.conflictZones'), icon: '&#9876;' },
+        { key: 'bases', label: t('components.deckgl.layers.militaryBases'), icon: '&#127963;' },
+        { key: 'nuclear', label: t('components.deckgl.layers.nuclearSites'), icon: '&#9762;' },
+        { key: 'irradiators', label: t('components.deckgl.layers.gammaIrradiators'), icon: '&#9888;' },
+        { key: 'spaceports', label: t('components.deckgl.layers.spaceports'), icon: '&#128640;' },
+        { key: 'cables', label: t('components.deckgl.layers.underseaCables'), icon: '&#128268;' },
+        { key: 'pipelines', label: t('components.deckgl.layers.pipelines'), icon: '&#128738;' },
+        { key: 'datacenters', label: t('components.deckgl.layers.aiDataCenters'), icon: '&#128421;' },
+        { key: 'military', label: t('components.deckgl.layers.militaryActivity'), icon: '&#9992;' },
+        { key: 'ais', label: t('components.deckgl.layers.shipTraffic'), icon: '&#128674;' },
+        { key: 'tradeRoutes', label: t('components.deckgl.layers.tradeRoutes'), icon: '&#9875;' },
+        { key: 'flights', label: t('components.deckgl.layers.flightDelays'), icon: '&#9992;' },
+        { key: 'protests', label: t('components.deckgl.layers.protests'), icon: '&#128226;' },
+        { key: 'ucdpEvents', label: t('components.deckgl.layers.ucdpEvents'), icon: '&#9876;' },
+        { key: 'displacement', label: t('components.deckgl.layers.displacementFlows'), icon: '&#128101;' },
+        { key: 'climate', label: t('components.deckgl.layers.climateAnomalies'), icon: '&#127787;' },
+        { key: 'weather', label: t('components.deckgl.layers.weatherAlerts'), icon: '&#9928;' },
+        { key: 'outages', label: t('components.deckgl.layers.internetOutages'), icon: '&#128225;' },
+        { key: 'cyberThreats', label: t('components.deckgl.layers.cyberThreats'), icon: '&#128737;' },
+        { key: 'natural', label: t('components.deckgl.layers.naturalEvents'), icon: '&#127755;' },
+        { key: 'fires', label: t('components.deckgl.layers.fires'), icon: '&#128293;' },
+        { key: 'waterways', label: t('components.deckgl.layers.strategicWaterways'), icon: '&#9875;' },
+        { key: 'economic', label: t('components.deckgl.layers.economicCenters'), icon: '&#128176;' },
+        { key: 'minerals', label: t('components.deckgl.layers.criticalMinerals'), icon: '&#128142;' },
+        { key: 'iranAttacks', label: t('components.deckgl.layers.iranAttacks'), icon: '&#127919;' },
+      ];
 
     toggles.innerHTML = `
       <div class="toggle-header">

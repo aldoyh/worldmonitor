@@ -67,6 +67,7 @@ export async function listAcledEvents(
 ): Promise<ListAcledEventsResponse> {
   const cacheKey = `${REDIS_CACHE_KEY}:${req.country || 'all'}:${req.start || 0}:${req.end || 0}`;
   try {
+    const cacheKey = `${REDIS_CACHE_KEY}:${req.country || 'all'}:${req.start || 0}:${req.end || 0}`;
     const result = await cachedFetchJson<ListAcledEventsResponse>(
       cacheKey,
       REDIS_CACHE_TTL,

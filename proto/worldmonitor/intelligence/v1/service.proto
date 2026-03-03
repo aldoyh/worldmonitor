@@ -39,9 +39,4 @@ service IntelligenceService {
   rpc SearchGdeltDocuments(SearchGdeltDocumentsRequest) returns (SearchGdeltDocumentsResponse) {
     option (sebuf.http.config) = {path: "/search-gdelt-documents", method: HTTP_METHOD_GET};
   }
-
-  // DeductSituation performs AI-powered situational analysis and deduction.
-  rpc DeductSituation(DeductSituationRequest) returns (DeductSituationResponse) {
-    option (sebuf.http.config) = {path: "/deduct-situation"};
-  }
 }

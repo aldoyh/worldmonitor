@@ -3624,9 +3624,8 @@ export class MapComponent {
     // SVG/mobile fallback intentionally does not render this layer to stay lightweight.
   }
 
-  public setIranEvents(events: IranEvent[]): void {
-    this.iranEvents = events;
-    this.render();
+  public setIranEvents(_events: import('@/services/conflict').IranEvent[]): void {
+    // SVG/mobile fallback intentionally does not render this layer.
   }
 
   public setNewsLocations(_data: Array<{ lat: number; lon: number; title: string; threatLevel: string; timestamp?: Date }>): void {

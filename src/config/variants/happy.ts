@@ -67,7 +67,6 @@ export const DEFAULT_MAP_LAYERS: MapLayers = {
   renewableInstallations: true,
   tradeRoutes: false,
   iranAttacks: false,
-  dayNight: false,
 };
 
 // Mobile defaults — same as desktop for happy variant
@@ -119,7 +118,6 @@ export const MOBILE_DEFAULT_MAP_LAYERS: MapLayers = {
   renewableInstallations: true,
   tradeRoutes: false,
   iranAttacks: false,
-  dayNight: false,
 };
 
 export const VARIANT_CONFIG: VariantConfig = {

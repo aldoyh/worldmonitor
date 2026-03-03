@@ -447,7 +447,7 @@ export async function getIndicatorData(
       year: years,
       pageSize: 0,
       cursor: '',
-    }, { signal: AbortSignal.timeout(20_000) });
+    });
   }, emptyWbFallback);
 
   return buildWorldBankResponse(indicator, resp.data);
@@ -584,9 +584,9 @@ export async function fetchBisData(): Promise<BisData> {
 
   try {
     const [policy, eer, credit] = await Promise.all([
-      hPolicy ? Promise.resolve(hPolicy) : bisPolicyBreaker.execute(() => client.getBisPolicyRates({}, { signal: AbortSignal.timeout(20_000) }), emptyBisPolicyFallback),
-      hEer ? Promise.resolve(hEer) : bisEerBreaker.execute(() => client.getBisExchangeRates({}, { signal: AbortSignal.timeout(20_000) }), emptyBisEerFallback),
-      hCredit ? Promise.resolve(hCredit) : bisCreditBreaker.execute(() => client.getBisCredit({}, { signal: AbortSignal.timeout(20_000) }), emptyBisCreditFallback),
+      hPolicy ? Promise.resolve(hPolicy) : bisPolicyBreaker.execute(() => client.getBisPolicyRates({}), emptyBisPolicyFallback),
+      hEer ? Promise.resolve(hEer) : bisEerBreaker.execute(() => client.getBisExchangeRates({}), emptyBisEerFallback),
+      hCredit ? Promise.resolve(hCredit) : bisCreditBreaker.execute(() => client.getBisCredit({}), emptyBisCreditFallback),
     ]);
     return {
       policyRates: policy.rates,

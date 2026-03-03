@@ -242,8 +242,6 @@
     "climate": "Climate Anomalies",
     "populationExposure": "Population Exposure",
     "securityAdvisories": "Security Advisories",
-    "orefSirens": "Israel Sirens",
-    "telegramIntel": "Telegram Intel",
     "startups": "Startups & VC",
     "vcblogs": "VC Insights & Essays",
     "regionalStartups": "Global Startup News",
@@ -951,9 +949,7 @@
         "commodityHubs": "Commodity Hubs",
         "gulfInvestments": "GCC Investments",
         "tradeRoutes": "Trade Routes",
-        "iranAttacks": "Iran Attacks",
-        "gpsJamming": "GPS JAMMING",
-        "dayNight": "Day/Night"
+        "iranAttacks": "Iran Attacks"
       },
       "tooltip": {
         "earthquake": "Earthquake",
@@ -1234,20 +1230,7 @@
         "hoursAgo": "{{count}}h ago",
         "daysAgo": "{{count}}d ago"
       },
-      "infoTooltip": "<strong>Security Advisories</strong><br>Travel advisories and security alerts from government foreign affairs agencies:<br><br><strong>Sources:</strong><br>🇺🇸 US State Dept Travel Advisories<br>🇦🇺 AU DFAT Smartraveller<br>🇬🇧 UK FCDO Travel Advice<br>🇳🇿 NZ MFAT SafeTravel<br><br><strong>Levels:</strong><br>🟥 Do Not Travel<br>🟧 Reconsider Travel<br>🟨 Exercise Caution<br>🟩 Normal Precautions"
-    },
-    "orefSirens": {
-      "checking": "Checking siren alerts...",
-      "noAlerts": "No active sirens — all clear",
-      "notConfigured": "Sirens service not configured",
-      "activeSirens": "{{count}} active siren(s)",
-      "area": "Area",
-      "time": "Time",
-      "justNow": "just now",
-      "historyCount": "{{count}} alerts in last 24h",
-      "historySummary": "{{count}} alerts in 24h — {{waves}} waves",
-      "loadingHistory": "Loading history...",
-      "infoTooltip": "<strong>Israel Sirens</strong><br>Real-time rocket and missile siren alerts from Israel Home Front Command.<br><br>Data is polled every 10 seconds. A pulsing red indicator means active sirens are sounding."
+      "infoTooltip": "<strong>Security Advisories</strong><br>Travel advisories and security alerts from government foreign affairs agencies:<br><br><strong>Sources:</strong><br>\uD83C\uDDFA\uD83C\uDDF8 US State Dept Travel Advisories<br>\uD83C\uDDE6\uD83C\uDDFA AU DFAT Smartraveller<br>\uD83C\uDDEC\uD83C\uDDE7 UK FCDO Travel Advice<br>\uD83C\uDDF3\uD83C\uDDFF NZ MFAT SafeTravel<br><br><strong>Levels:</strong><br>\uD83D\uDFE5 Do Not Travel<br>\uD83D\uDFE7 Reconsider Travel<br>\uD83D\uDFE8 Exercise Caution<br>\uD83D\uDFE9 Normal Precautions"
     },
     "satelliteFires": {
       "noData": "No fire data available",
@@ -2224,6 +2207,7 @@
     "close": "Close",
     "currentVariant": "(current)",
     "retry": "Retry",
+    "retrying": "Retrying...",
     "refresh": "Refresh",
     "all": "All"
   }

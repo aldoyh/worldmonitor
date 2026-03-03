@@ -192,9 +192,22 @@ export async function listInternetOutages(
       return outages.length > 0 ? { outages, pagination: undefined } : null;
     });
 
-    if (result) fallbackOutagesCache = { data: result, ts: Date.now() };
-    const effective = result || fallbackOutagesCache?.data;
-    return { outages: filterOutages(effective?.outages || [], req), pagination: undefined };
+    const outages = result?.outages || [];
+
+    // Always apply filters (to both cached and fresh data)
+    let filtered = outages;
+    if (req.country) {
+      const target = req.country.toLowerCase();
+      filtered = outages.filter((o) => o.country.toLowerCase().includes(target));
+    }
+    if (req.start) {
+      filtered = filtered.filter((o) => o.detectedAt >= req.start);
+    }
+    if (req.end) {
+      filtered = filtered.filter((o) => o.detectedAt <= req.end);
+    }
+
+    return { outages: filtered, pagination: undefined };
   } catch {
     const stale = fallbackOutagesCache?.data?.outages || [];
     return { outages: filterOutages(stale, req), pagination: undefined };

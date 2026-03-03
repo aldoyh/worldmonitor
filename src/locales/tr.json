@@ -210,48 +210,7 @@
     "gccInvestments": "GCC Yatirimlari",
     "geoHubs": "Jeopolitik Merkezler",
     "liveWebcams": "Canli Web Kameralari",
-    "securityAdvisories": "Güvenlik Uyarıları",
-    "orefSirens": "Israel Sirens",
-    "telegramIntel": "Telegram İstihbarat",
-    "giving": "Küresel Bağış",
-    "supplyChain": "Tedarik Zinciri",
-    "gulfEconomies": "Körfez Ekonomileri",
-    "gulfIndices": "Körfez Endeksleri",
-    "gulfCurrencies": "Körfez Para Birimleri",
-    "gulfOil": "Körfez Petrolü"
-  },
-  "commands": {
-    "prefixes": {
-      "map": "Harita",
-      "panel": "Panel",
-      "brief": "Özet"
-    },
-    "categories": {
-      "navigate": "Gezinme",
-      "layers": "Katmanlar",
-      "panels": "Paneller",
-      "view": "Görünüm",
-      "actions": "Eylemler",
-      "country": "Ülke"
-    },
-    "regions": {
-      "global": "Küresel görünüm",
-      "mena": "Orta Doğu ve Kuzey Afrika",
-      "eu": "Avrupa",
-      "asia": "Asya-Pasifik",
-      "america": "Amerika",
-      "africa": "Afrika",
-      "latam": "Latin Amerika",
-      "oceania": "Okyanusya"
-    },
-    "tips": {
-      "map": "Haritada o konuma uçmak için bir ülke adı yazın",
-      "panel": "Bir panel adı yazarak o panele gidin",
-      "brief": "Bir ülke adı yazarak istihbarat özeti alın",
-      "layers": "Katman ön ayarları için \"military\" veya \"finance\" yazın",
-      "time": "Zamana göre filtrelemek için \"1h\", \"24h\" veya \"7d\" yazın",
-      "settings": "\"dark mode\", \"settings\" veya \"fullscreen\" yazın"
-    }
+    "securityAdvisories": "Güvenlik Uyarıları"
   },
   "modals": {
     "search": {
@@ -1415,13 +1374,7 @@
       "regionLatinAmerica": "Latin Amerika",
       "regionAsia": "Asya",
       "regionMiddleEast": "Orta Doğu",
-      "regionAfrica": "Afrika",
-      "regionOceania": "Okyanusya",
-      "botCheck": "YouTube, {{name}} oynatmak için oturum açmanızı istiyor",
-      "channelNotFound": "YouTube kanalı bulunamadı",
-      "invalidHandle": "Geçerli bir YouTube tanıtıcısı girin (örn. @KanalAdı)",
-      "signInToYouTube": "YouTube'a giriş yap",
-      "verifying": "Doğrulanıyor…"
+      "regionAfrica": "Afrika"
     },
     "securityAdvisories": {
       "loading": "Seyahat uyarıları yükleniyor...",
@@ -1444,69 +1397,6 @@
         "daysAgo": "{{count}} gün önce"
       },
       "infoTooltip": "<strong>Güvenlik Uyarıları</strong><br>Hükümet kurumlarından seyahat uyarıları ve güvenlik bildirimleri."
-    },
-    "orefSirens": {
-      "checking": "Checking siren alerts...",
-      "noAlerts": "No active sirens — all clear",
-      "notConfigured": "Sirens service not configured",
-      "activeSirens": "{{count}} active siren(s)",
-      "area": "Area",
-      "time": "Time",
-      "justNow": "just now",
-      "historyCount": "{{count}} alerts in last 24h",
-      "infoTooltip": "<strong>Israel Sirens</strong><br>Real-time rocket and missile siren alerts from Israel Home Front Command.<br><br>Data is polled every 10 seconds. A pulsing red indicator means active sirens are sounding.",
-      "historySummary": "24 saatte {{count}} uyarı — {{waves}} dalga",
-      "loadingHistory": "Geçmiş yükleniyor..."
-    },
-    "breakingNews": {
-      "critical": "KRİTİK",
-      "dismiss": "Kapat",
-      "enableNotifications": "Masaüstü bildirimlerini etkinleştir",
-      "high": "YÜKSEK"
-    },
-    "giving": {
-      "activityIndex": "Faaliyet Endeksi",
-      "cafIndex": "CAF Endeksi",
-      "candidGrants": "Candid Hibeleri",
-      "category": "Kategori",
-      "cryptoDaily": "Günlük Kripto",
-      "dailyInflow": "24 Saatlik Giriş",
-      "dailyVol": "Günlük Hacim",
-      "dataLag": "Veri Gecikmesi",
-      "estDailyFlow": "Tahmini Günlük Akış",
-      "freshness": "Veri",
-      "infoTooltip": "<strong>Küresel Bağış Faaliyet Endeksi</strong> Kitlesel fonlama platformları ve kripto cüzdanları üzerinden kişisel bağışları izleyen bileşik endeks.<ul><li><strong>Platformlar</strong>: GoFundMe, GlobalGiving, JustGiving kampanya örneklemesi</li><li><strong>Kripto</strong>: Zincir üzeri hayır kurumu cüzdan girişleri (Endaoment, Giving Block)</li><li><strong>Kurumsal</strong>: OECD ODA, CAF Dünya Bağış Endeksi, Candid hibeleri</li></ul>Endeks yönsel bir göstergedir (kesin dolar tutarları değildir). Canlı örnekleme ile yayımlanan yıllık raporları birleştirir.",
-      "oecdOda": "OECD ODA",
-      "ofTotal": "Toplamın %'si",
-      "platform": "Platform",
-      "share": "Pay",
-      "tabs": {
-        "categories": "Kategoriler",
-        "crypto": "Kripto",
-        "institutional": "Kurumsal",
-        "platforms": "Platformlar"
-      },
-      "topReceivers": "En Büyük Alıcılar",
-      "trend": "Eğilim",
-      "trending": "TREND",
-      "velocity": "Hız",
-      "wallets": "Cüzdanlar"
-    },
-    "supplyChain": {
-      "chokepoints": "Darboğazlar",
-      "fredKeyMissing": "Nakliye ücretleri için FRED API anahtarı gerekli — Ayarlar'dan ekleyin. Darboğazlar ve mineraller anahtarsız kullanılabilir.",
-      "mineral": "Mineral",
-      "minerals": "Mineraller",
-      "noChokepoints": "Darboğaz verileri yükleniyor...",
-      "noMinerals": "Mineral verileri yükleniyor...",
-      "noShipping": "Nakliye ücreti verisi mevcut değil",
-      "risk": "Risk",
-      "shipping": "Nakliye",
-      "sources": "FRED / NGA / USGS",
-      "spikeAlert": "Ani artış tespit edildi — ücret 52 haftalık ortalamanın önemli ölçüde üzerinde (haftalık)",
-      "topProducers": "En Büyük Üreticiler",
-      "upstreamUnavailable": "Tedarik zinciri verileri geçici olarak kullanılamıyor — önbellek verileri gösteriliyor",
-      "warnings": "uyarı(lar)"
     }
   },
   "popups": {
@@ -2156,8 +2046,6 @@
     "currentVariant": "(mevcut)",
     "retry": "Retry",
     "refresh": "Refresh",
-    "all": "Tümü",
-    "loadingGiving": "Küresel bağış verileri yükleniyor",
-    "rateLimitedMarket": "Piyasa verileri geçici olarak kullanılamıyor (hız sınırlaması) — kısa süre içinde yeniden denenecek"
+    "all": "Tümü"
   }
 }

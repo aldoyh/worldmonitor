@@ -1,6 +1,4 @@
 import type { NewsItem } from '@/types';
-import type { OrefAlert } from '@/services/oref-alerts';
-import { getSourceTier } from '@/config/feeds';
 
 export interface BreakingAlert {
   id: string;
@@ -9,7 +7,7 @@ export interface BreakingAlert {
   link?: string;
   threatLevel: 'critical' | 'high';
   timestamp: Date;
-  origin: 'rss_alert' | 'keyword_spike' | 'hotspot_escalation' | 'military_surge' | 'oref_siren';
+  origin: 'rss_alert' | 'keyword_spike' | 'hotspot_escalation' | 'military_surge';
 }
 
 export interface AlertSettings {
@@ -23,6 +21,7 @@ const SETTINGS_KEY = 'wm-breaking-alerts-v1';
 const RECENCY_GATE_MS = 15 * 60 * 1000;
 const PER_EVENT_COOLDOWN_MS = 30 * 60 * 1000;
 const GLOBAL_COOLDOWN_MS = 60 * 1000;
+const SESSION_START = Date.now();
 
 const DEFAULT_SETTINGS: AlertSettings = {
   enabled: true,
@@ -87,7 +86,9 @@ export function updateAlertSettings(partial: Partial<AlertSettings>): void {
 }
 
 function isRecent(pubDate: Date): boolean {
-  return pubDate.getTime() >= (Date.now() - RECENCY_GATE_MS);
+  const now = Date.now();
+  const recencyCutoff = Math.max(now - RECENCY_GATE_MS, SESSION_START);
+  return pubDate.getTime() >= recencyCutoff;
 }
 
 function pruneDedupeMap(): void {
@@ -132,11 +133,6 @@ export function checkBatchForBreakingAlerts(items: NewsItem[]): void {
     if (level !== 'critical' && level !== 'high') continue;
     if (settings.sensitivity === 'critical-only' && level !== 'critical') continue;
 
-    // Tier 3+ sources (think tanks, specialty) need LLM confirmation to fire alerts.
-    // Keyword-only "war" matches on analysis articles are too noisy.
-    const tier = getSourceTier(item.source);
-    if (tier >= 3 && item.threat.source === 'keyword') continue;
-
     const key = makeAlertKey(item.title, item.source, item.link);
     if (isDuplicate(key)) continue;
 
@@ -158,34 +154,6 @@ export function checkBatchForBreakingAlerts(items: NewsItem[]): void {
   }
 
   if (best && !isGlobalCooldown(best.threatLevel)) dispatchAlert(best);
-}
-
-export function dispatchOrefBreakingAlert(alerts: OrefAlert[]): void {
-  const settings = getAlertSettings();
-  if (!settings.enabled || !alerts.length) return;
-
-  const title = alerts[0]?.title || 'Siren alert';
-  const allLocations = alerts.flatMap(a => a.data);
-  const shown = allLocations.slice(0, 3);
-  const overflow = allLocations.length - shown.length;
-  const locationSuffix = shown.length
-    ? ' — ' + shown.join(', ') + (overflow > 0 ? ` +${overflow} areas` : '')
-    : '';
-  const headline = title + locationSuffix;
-
-  const keyParts = alerts.map(a => a.id || `${a.cat}|${a.title}|${a.alertDate}`).sort();
-  const dedupeKey = 'oref:' + simpleHash(keyParts.join(','));
-
-  if (isDuplicate(dedupeKey)) return;
-
-  dispatchAlert({
-    id: dedupeKey,
-    headline,
-    source: 'OREF Pikud HaOref',
-    threatLevel: 'critical',
-    timestamp: new Date(),
-    origin: 'oref_siren',
-  });
 }
 
 export function initBreakingNewsAlerts(): void {

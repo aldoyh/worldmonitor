@@ -210,48 +210,7 @@
     "gccInvestments": "GCC投资",
     "geoHubs": "地缘政治枢纽",
     "liveWebcams": "实时摄像头",
-    "securityAdvisories": "安全警告",
-    "orefSirens": "Israel Sirens",
-    "telegramIntel": "Telegram 情报",
-    "giving": "全球捐赠",
-    "supplyChain": "供应链",
-    "gulfEconomies": "海湾经济",
-    "gulfIndices": "海湾指数",
-    "gulfCurrencies": "海湾货币",
-    "gulfOil": "海湾石油"
-  },
-  "commands": {
-    "prefixes": {
-      "map": "地图",
-      "panel": "面板",
-      "brief": "简报"
-    },
-    "categories": {
-      "navigate": "导航",
-      "layers": "图层",
-      "panels": "面板",
-      "view": "视图",
-      "actions": "操作",
-      "country": "国家"
-    },
-    "regions": {
-      "global": "全球视图",
-      "mena": "中东和北非",
-      "eu": "欧洲",
-      "asia": "亚太地区",
-      "america": "美洲",
-      "africa": "非洲",
-      "latam": "拉丁美洲",
-      "oceania": "大洋洲"
-    },
-    "tips": {
-      "map": "输入国家名称以在地图上飞往该位置",
-      "panel": "输入面板名称以滚动到该面板",
-      "brief": "输入国家名称以获取情报简报",
-      "layers": "输入 \"military\" 或 \"finance\" 以应用图层预设",
-      "time": "输入 \"1h\"、\"24h\" 或 \"7d\" 按时间筛选",
-      "settings": "输入 \"dark mode\"、\"settings\" 或 \"fullscreen\""
-    }
+    "securityAdvisories": "安全警告"
   },
   "modals": {
     "search": {
@@ -1415,13 +1374,7 @@
       "regionLatinAmerica": "拉丁美洲",
       "regionAsia": "亚洲",
       "regionMiddleEast": "中东",
-      "regionAfrica": "非洲",
-      "regionOceania": "大洋洲",
-      "botCheck": "YouTube要求登录才能播放{{name}}",
-      "channelNotFound": "未找到YouTube频道",
-      "invalidHandle": "请输入有效的YouTube用户名（例如 @ChannelName）",
-      "signInToYouTube": "登录YouTube",
-      "verifying": "验证中…"
+      "regionAfrica": "非洲"
     },
     "securityAdvisories": {
       "loading": "正在加载旅行警告...",
@@ -1444,69 +1397,6 @@
         "daysAgo": "{{count}}天前"
       },
       "infoTooltip": "<strong>安全警告</strong><br>来自各国政府的旅行警告和安全提示。"
-    },
-    "orefSirens": {
-      "checking": "Checking siren alerts...",
-      "noAlerts": "No active sirens — all clear",
-      "notConfigured": "Sirens service not configured",
-      "activeSirens": "{{count}} active siren(s)",
-      "area": "Area",
-      "time": "Time",
-      "justNow": "just now",
-      "historyCount": "{{count}} alerts in last 24h",
-      "infoTooltip": "<strong>Israel Sirens</strong><br>Real-time rocket and missile siren alerts from Israel Home Front Command.<br><br>Data is polled every 10 seconds. A pulsing red indicator means active sirens are sounding.",
-      "historySummary": "24小时内{{count}}次警报 — {{waves}}波次",
-      "loadingHistory": "正在加载历史记录..."
-    },
-    "breakingNews": {
-      "critical": "紧急",
-      "dismiss": "忽略",
-      "enableNotifications": "开启桌面通知",
-      "high": "重要"
-    },
-    "giving": {
-      "activityIndex": "活动指数",
-      "cafIndex": "CAF指数",
-      "candidGrants": "Candid拨款",
-      "category": "类别",
-      "cryptoDaily": "加密日报",
-      "dailyInflow": "24小时流入",
-      "dailyVol": "日成交量",
-      "dataLag": "数据延迟",
-      "estDailyFlow": "估计日流量",
-      "freshness": "数据",
-      "infoTooltip": "<strong>全球捐赠活动指数</strong> 跟踪众筹平台和加密钱包个人捐赠的综合指数。<ul><li><strong>平台</strong>：GoFundMe、GlobalGiving、JustGiving活动抽样</li><li><strong>加密</strong>：链上慈善钱包流入（Endaoment、Giving Block）</li><li><strong>机构</strong>：OECD ODA、CAF世界捐赠指数、Candid拨款</li></ul>指数为方向性指标，非精确金额。结合实时抽样与已发布年度报告。",
-      "oecdOda": "OECD ODA",
-      "ofTotal": "占总计",
-      "platform": "平台",
-      "share": "份额",
-      "tabs": {
-        "categories": "类别",
-        "crypto": "加密",
-        "institutional": "机构",
-        "platforms": "平台"
-      },
-      "topReceivers": "主要受益方",
-      "trend": "趋势",
-      "trending": "趋势",
-      "velocity": "增速",
-      "wallets": "钱包"
-    },
-    "supplyChain": {
-      "chokepoints": "咽喉要道",
-      "fredKeyMissing": "航运费率需要FRED API密钥 — 请在设置中添加。咽喉要道和矿产无需密钥即可使用。",
-      "mineral": "矿产",
-      "minerals": "矿产",
-      "noChokepoints": "正在加载咽喉要道数据...",
-      "noMinerals": "正在加载矿产数据...",
-      "noShipping": "航运费率数据不可用",
-      "risk": "风险",
-      "shipping": "航运",
-      "sources": "FRED / NGA / USGS",
-      "spikeAlert": "检测到异常飙升 — 费率显著高于52周均值（周度）",
-      "topProducers": "主要生产国",
-      "upstreamUnavailable": "供应链数据暂时不可用 — 显示缓存数据",
-      "warnings": "条警告"
     }
   },
   "popups": {
@@ -2156,8 +2046,6 @@
     "currentVariant": "(当前)",
     "retry": "Retry",
     "refresh": "Refresh",
-    "all": "全部",
-    "loadingGiving": "正在加载全球捐赠数据",
-    "rateLimitedMarket": "市场数据暂时不可用（请求受限）— 即将自动重试"
+    "all": "全部"
   }
 }

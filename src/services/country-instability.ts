@@ -1,7 +1,4 @@
-import type { SocialUnrestEvent, MilitaryFlight, MilitaryVessel, ClusteredEvent, InternetOutage, AisDisruptionEvent, CyberThreat } from '@/types';
-import type { AirportDelayAlert } from '@/services/aviation';
-import type { SecurityAdvisory } from '@/services/security-advisories';
-import type { TemporalAnomaly } from '@/services/temporal-baseline';
+import type { SocialUnrestEvent, MilitaryFlight, MilitaryVessel, ClusteredEvent, InternetOutage } from '@/types';
 import { tokenizeForMatch, matchKeyword } from '@/utils/keyword-match';
 import { INTEL_HOTSPOTS, CONFLICT_ZONES, STRATEGIC_WATERWAYS } from '@/config/geo';
 import { CURATED_COUNTRIES, DEFAULT_BASELINE_RISK, DEFAULT_EVENT_MULTIPLIER, getHotspotCountries } from '@/config/countries';
@@ -213,7 +210,6 @@ export function clearCountryData(): void {
   countryDataMap.clear();
   hotspotActivityMap.clear();
   newsEventIndexMap.clear();
-  intelligenceSignalsLoaded = false;
 }
 
 export function getCountryData(code: string): CountryData | undefined {
@@ -815,22 +811,7 @@ function calcConflictScore(data: CountryData, countryCode: string): number {
     newsFloor = calcNewsConflictFloor(data, multiplier);
   }
 
-  let strikeBoost = 0;
-  const sevenDaysAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
-  const recentStrikes = data.strikes.filter(s => s.timestamp >= sevenDaysAgo);
-  if (recentStrikes.length > 0) {
-    const highCount = recentStrikes.filter(s =>
-      s.severity.toLowerCase() === 'high' || s.severity.toLowerCase() === 'critical'
-    ).length;
-    strikeBoost = Math.min(50, recentStrikes.length * 3 + highCount * 5);
-  }
-
-  let orefBoost = 0;
-  if (countryCode === 'IL' && data.orefAlertCount > 0) {
-    orefBoost = 25 + Math.min(25, data.orefAlertCount * 5);
-  }
-
-  return Math.min(100, Math.max(acledScore, hapiFallback, newsFloor) + strikeBoost + orefBoost);
+  return Math.min(100, Math.max(acledScore, hapiFallback, newsFloor));
 }
 
 function getUcdpFloor(data: CountryData): number {

@@ -31,7 +31,7 @@ const xmlParser = new XMLParser({
 
 async function fetchArxivPapers(req: ListArxivPapersRequest): Promise<ArxivPaper[]> {
   const category = req.category || 'cs.AI';
-  const pageSize = clampInt(req.pageSize, 50, 1, 100);
+  const pageSize = req.pageSize || 50;
 
   let searchQuery: string;
   if (req.query) {
@@ -92,7 +92,7 @@ export async function listArxivPapers(
   req: ListArxivPapersRequest,
 ): Promise<ListArxivPapersResponse> {
   try {
-    const cacheKey = `${REDIS_CACHE_KEY}:${req.category || 'cs.AI'}:${req.query || ''}:${clampInt(req.pageSize, 50, 1, 100)}`;
+    const cacheKey = `${REDIS_CACHE_KEY}:${req.category || 'cs.AI'}:${req.query || ''}:${req.pageSize || 50}`;
     const result = await cachedFetchJson<ListArxivPapersResponse>(
       cacheKey,
       REDIS_CACHE_TTL,

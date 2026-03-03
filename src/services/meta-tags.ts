@@ -39,6 +39,7 @@ export function updateMetaTagsForStory(meta: StoryMeta): void {
   setMetaTag('twitter:image', imageUrl);
 
   sessionStorage.setItem('storyMeta', JSON.stringify(meta));
+
 }
 
 export function resetMetaTags(): void {

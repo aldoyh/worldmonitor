@@ -210,48 +210,7 @@
     "gccInvestments": "Đầu tư GCC",
     "geoHubs": "Trung tâm Địa chính trị",
     "liveWebcams": "Webcam Trực tiếp",
-    "securityAdvisories": "Cảnh báo An ninh",
-    "orefSirens": "Israel Sirens",
-    "telegramIntel": "Tình báo Telegram",
-    "giving": "Từ thiện Toàn cầu",
-    "supplyChain": "Chuỗi Cung ứng",
-    "gulfEconomies": "Kinh tế vùng Vịnh",
-    "gulfIndices": "Chỉ số vùng Vịnh",
-    "gulfCurrencies": "Tiền tệ vùng Vịnh",
-    "gulfOil": "Dầu vùng Vịnh"
-  },
-  "commands": {
-    "prefixes": {
-      "map": "Bản đồ",
-      "panel": "Bảng",
-      "brief": "Tóm tắt"
-    },
-    "categories": {
-      "navigate": "Điều hướng",
-      "layers": "Lớp",
-      "panels": "Bảng",
-      "view": "Xem",
-      "actions": "Hành động",
-      "country": "Quốc gia"
-    },
-    "regions": {
-      "global": "Toàn cầu",
-      "mena": "Trung Đông & Bắc Phi",
-      "eu": "Châu Âu",
-      "asia": "Châu Á - Thái Bình Dương",
-      "america": "Châu Mỹ",
-      "africa": "Châu Phi",
-      "latam": "Mỹ Latinh",
-      "oceania": "Châu Đại Dương"
-    },
-    "tips": {
-      "map": "Nhập tên quốc gia để bay đến vị trí đó trên bản đồ",
-      "panel": "Nhập tên bảng điều khiển để cuộn đến đó",
-      "brief": "Nhập tên quốc gia để xem báo cáo tình báo",
-      "layers": "Nhập \"military\" hoặc \"finance\" để áp dụng bộ lớp có sẵn",
-      "time": "Nhập \"1h\", \"24h\" hoặc \"7d\" để lọc theo thời gian",
-      "settings": "Nhập \"dark mode\", \"settings\" hoặc \"fullscreen\""
-    }
+    "securityAdvisories": "Cảnh báo An ninh"
   },
   "modals": {
     "search": {
@@ -1415,13 +1374,7 @@
       "regionLatinAmerica": "Mỹ Latinh",
       "regionAsia": "Châu Á",
       "regionMiddleEast": "Trung Đông",
-      "regionAfrica": "Châu Phi",
-      "regionOceania": "Châu Đại Dương",
-      "botCheck": "YouTube yêu cầu đăng nhập để phát {{name}}",
-      "channelNotFound": "Không tìm thấy kênh YouTube",
-      "invalidHandle": "Nhập handle YouTube hợp lệ (ví dụ: @TênKênh)",
-      "signInToYouTube": "Đăng nhập YouTube",
-      "verifying": "Đang xác minh…"
+      "regionAfrica": "Châu Phi"
     },
     "securityAdvisories": {
       "loading": "Đang tải cảnh báo du lịch...",
@@ -1444,69 +1397,6 @@
         "daysAgo": "{{count}} ngày trước"
       },
       "infoTooltip": "<strong>Cảnh báo An ninh</strong><br>Cảnh báo du lịch và an ninh từ các cơ quan chính phủ."
-    },
-    "orefSirens": {
-      "checking": "Checking siren alerts...",
-      "noAlerts": "No active sirens — all clear",
-      "notConfigured": "Sirens service not configured",
-      "activeSirens": "{{count}} active siren(s)",
-      "area": "Area",
-      "time": "Time",
-      "justNow": "just now",
-      "historyCount": "{{count}} alerts in last 24h",
-      "infoTooltip": "<strong>Israel Sirens</strong><br>Real-time rocket and missile siren alerts from Israel Home Front Command.<br><br>Data is polled every 10 seconds. A pulsing red indicator means active sirens are sounding.",
-      "historySummary": "{{count}} cảnh báo trong 24h — {{waves}} đợt",
-      "loadingHistory": "Đang tải lịch sử..."
-    },
-    "breakingNews": {
-      "critical": "NGHIÊM TRỌNG",
-      "dismiss": "Bỏ qua",
-      "enableNotifications": "Bật thông báo trên máy tính",
-      "high": "CAO"
-    },
-    "giving": {
-      "activityIndex": "Chỉ số Hoạt động",
-      "cafIndex": "Chỉ số CAF",
-      "candidGrants": "Tài trợ Candid",
-      "category": "Danh mục",
-      "cryptoDaily": "Crypto hàng ngày",
-      "dailyInflow": "Dòng vào 24h",
-      "dailyVol": "KL hàng ngày",
-      "dataLag": "Độ trễ Dữ liệu",
-      "estDailyFlow": "Dòng tiền ước tính/ngày",
-      "freshness": "Dữ liệu",
-      "infoTooltip": "<strong>Chỉ số Hoạt động Từ thiện Toàn cầu</strong> Chỉ số tổng hợp theo dõi quyên góp cá nhân qua nền tảng gây quỹ cộng đồng và ví tiền mã hóa.<ul><li><strong>Nền tảng</strong>: GoFundMe, GlobalGiving, JustGiving lấy mẫu chiến dịch</li><li><strong>Crypto</strong>: Dòng tiền vào ví từ thiện on-chain (Endaoment, Giving Block)</li><li><strong>Tổ chức</strong>: OECD ODA, CAF World Giving Index, tài trợ Candid</li></ul>Chỉ số mang tính định hướng (không phải số tiền chính xác). Kết hợp lấy mẫu trực tiếp với báo cáo thường niên đã công bố.",
-      "oecdOda": "OECD ODA",
-      "ofTotal": "% tổng",
-      "platform": "Nền tảng",
-      "share": "Tỷ lệ",
-      "tabs": {
-        "categories": "Danh mục",
-        "crypto": "Crypto",
-        "institutional": "Tổ chức",
-        "platforms": "Nền tảng"
-      },
-      "topReceivers": "Người nhận hàng đầu",
-      "trend": "Xu hướng",
-      "trending": "XU HƯỚNG",
-      "velocity": "Tốc độ",
-      "wallets": "Ví"
-    },
-    "supplyChain": {
-      "chokepoints": "Điểm nghẽn",
-      "fredKeyMissing": "Cần khóa API FRED cho giá cước vận chuyển — thêm trong Cài đặt. Điểm nghẽn và khoáng sản khả dụng mà không cần khóa.",
-      "mineral": "Khoáng sản",
-      "minerals": "Khoáng sản",
-      "noChokepoints": "Đang tải dữ liệu điểm nghẽn...",
-      "noMinerals": "Đang tải dữ liệu khoáng sản...",
-      "noShipping": "Dữ liệu giá cước vận chuyển không khả dụng",
-      "risk": "Rủi ro",
-      "shipping": "Vận tải biển",
-      "sources": "FRED / NGA / USGS",
-      "spikeAlert": "Phát hiện đột biến — giá cao hơn đáng kể so với trung bình 52 tuần (hàng tuần)",
-      "topProducers": "Nhà sản xuất hàng đầu",
-      "upstreamUnavailable": "Dữ liệu chuỗi cung ứng tạm thời không khả dụng — hiển thị dữ liệu đã lưu cache",
-      "warnings": "cảnh báo"
     }
   },
   "popups": {
@@ -2156,8 +2046,6 @@
     "currentVariant": "(hiện tại)",
     "retry": "Thử lại",
     "refresh": "Làm mới",
-    "all": "Tất cả",
-    "loadingGiving": "Đang tải dữ liệu từ thiện toàn cầu",
-    "rateLimitedMarket": "Dữ liệu thị trường tạm thời không khả dụng (bị giới hạn tốc độ) — đang thử lại"
+    "all": "Tất cả"
   }
 }

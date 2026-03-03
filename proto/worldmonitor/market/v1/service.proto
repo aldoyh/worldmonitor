@@ -50,9 +50,4 @@ service MarketService {
   rpc GetCountryStockIndex(GetCountryStockIndexRequest) returns (GetCountryStockIndexResponse) {
     option (sebuf.http.config) = {path: "/get-country-stock-index", method: HTTP_METHOD_GET};
   }
-
-  // ListGulfQuotes retrieves Gulf region market quotes (indices, currencies, oil).
-  rpc ListGulfQuotes(ListGulfQuotesRequest) returns (ListGulfQuotesResponse) {
-    option (sebuf.http.config) = {path: "/list-gulf-quotes", method: HTTP_METHOD_GET};
-  }
 }

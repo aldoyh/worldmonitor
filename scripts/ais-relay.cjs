@@ -3249,100 +3249,40 @@ function handleWorldBankRequest(req, res) {
 const POLYMARKET_ENABLED = String(process.env.POLYMARKET_ENABLED || 'true').toLowerCase() !== 'false';
 const polymarketCache = new Map(); // key: query string → { data, timestamp }
 const polymarketInflight = new Map(); // key → Promise (dedup concurrent requests)
-const POLYMARKET_CACHE_TTL_MS = 10 * 60 * 1000; // 10 min — reduce upstream pressure
-const POLYMARKET_NEG_TTL_MS = 5 * 60 * 1000; // 5 min negative cache on 429/error
-
-// Circuit breaker — stops upstream requests after repeated failures to prevent OOM
-const polymarketCircuitBreaker = { failures: 0, openUntil: 0 };
-const POLYMARKET_CB_THRESHOLD = 5;
-const POLYMARKET_CB_COOLDOWN_MS = 60 * 1000;
-
-// Concurrent upstream limiter — queues excess requests instead of rejecting them
-const POLYMARKET_MAX_CONCURRENT = 3;
-const POLYMARKET_MAX_QUEUED = 20;
-let polymarketActiveUpstream = 0;
-const polymarketQueue = []; // Array of () => void (resolve-waiters)
-
-function tripPolymarketCircuitBreaker() {
-  polymarketCircuitBreaker.failures++;
-  if (polymarketCircuitBreaker.failures >= POLYMARKET_CB_THRESHOLD) {
-    polymarketCircuitBreaker.openUntil = Date.now() + POLYMARKET_CB_COOLDOWN_MS;
-    console.error(`[Relay] Polymarket circuit OPEN — cooling down ${POLYMARKET_CB_COOLDOWN_MS / 1000}s`);
-  }
-}
-
-function releasePolymarketSlot() {
-  polymarketActiveUpstream--;
-  if (polymarketQueue.length > 0) {
-    const next = polymarketQueue.shift();
-    polymarketActiveUpstream++;
-    next();
-  }
-}
-
-function acquirePolymarketSlot() {
-  if (polymarketActiveUpstream < POLYMARKET_MAX_CONCURRENT) {
-    polymarketActiveUpstream++;
-    return Promise.resolve();
-  }
-  if (polymarketQueue.length >= POLYMARKET_MAX_QUEUED) {
-    return Promise.reject(new Error('queue full'));
-  }
-  return new Promise((resolve) => { polymarketQueue.push(resolve); });
-}
+const POLYMARKET_CACHE_TTL_MS = 2 * 60 * 1000; // 2 min — market data changes frequently
+const POLYMARKET_NEG_TTL_MS = 30 * 1000; // 30s negative cache on 429/error
 
 function fetchPolymarketUpstream(cacheKey, endpoint, params, tag) {
-  return acquirePolymarketSlot().catch(() => 'REJECTED').then((slotResult) => {
-    if (slotResult === 'REJECTED') {
-      polymarketCache.set(cacheKey, { data: '[]', timestamp: Date.now() - POLYMARKET_CACHE_TTL_MS + POLYMARKET_NEG_TTL_MS });
-      return null;
-    }
-    const gammaUrl = `https://gamma-api.polymarket.com/${endpoint}?${params}`;
-    console.log('[Relay] Polymarket request (MISS):', endpoint, tag || '');
+  const gammaUrl = `https://gamma-api.polymarket.com/${endpoint}?${params}`;
+  console.log('[Relay] Polymarket request (MISS):', endpoint, tag || '');
 
-    return new Promise((resolve) => {
-      let finalized = false;
-      function finalize(ok) {
-        if (finalized) return;
-        finalized = true;
-        releasePolymarketSlot();
-        if (ok) {
-          polymarketCircuitBreaker.failures = 0;
-        } else {
-          tripPolymarketCircuitBreaker();
-          polymarketCache.set(cacheKey, { data: '[]', timestamp: Date.now() - POLYMARKET_CACHE_TTL_MS + POLYMARKET_NEG_TTL_MS });
-        }
+  return new Promise((resolve) => {
+    const request = https.get(gammaUrl, {
+      headers: { 'Accept': 'application/json' },
+      timeout: 10000,
+    }, (response) => {
+      if (response.statusCode !== 200) {
+        console.error(`[Relay] Polymarket upstream ${response.statusCode}`);
+        response.resume();
+        polymarketCache.set(cacheKey, { data: '[]', timestamp: Date.now() - POLYMARKET_CACHE_TTL_MS + POLYMARKET_NEG_TTL_MS });
+        resolve(null);
+        return;
       }
-      const request = https.get(gammaUrl, {
-        headers: { 'Accept': 'application/json' },
-        timeout: 10000,
-      }, (response) => {
-        if (response.statusCode !== 200) {
-          console.error(`[Relay] Polymarket upstream ${response.statusCode} (failures: ${polymarketCircuitBreaker.failures + 1})`);
-          response.resume();
-          finalize(false);
-          resolve(null);
-          return;
-        }
-        let data = '';
-        response.on('data', chunk => data += chunk);
-        response.on('end', () => {
-          finalize(true);
-          polymarketCache.set(cacheKey, { data, timestamp: Date.now() });
-          resolve(data);
-        });
-        response.on('error', () => { finalize(false); resolve(null); });
+      let data = '';
+      response.on('data', chunk => data += chunk);
+      response.on('end', () => {
+        polymarketCache.set(cacheKey, { data, timestamp: Date.now() });
+        resolve(data);
       });
-      request.on('error', (err) => {
-        console.error('[Relay] Polymarket error:', err.message);
-        finalize(false);
-        resolve(null);
-      });
-      request.on('timeout', () => {
-        request.destroy();
-        finalize(false);
-        resolve(null);
-      });
+    });
+    request.on('error', (err) => {
+      console.error('[Relay] Polymarket error:', err.message);
+      polymarketCache.set(cacheKey, { data: '[]', timestamp: Date.now() - POLYMARKET_CACHE_TTL_MS + POLYMARKET_NEG_TTL_MS });
+      resolve(null);
+    });
+    request.on('timeout', () => {
+      request.destroy();
+      resolve(null);
     });
   });
 }
@@ -3386,26 +3326,22 @@ function handlePolymarketRequest(req, res) {
   if (cached && Date.now() - cached.timestamp < POLYMARKET_CACHE_TTL_MS) {
     return sendCompressed(req, res, 200, {
       'Content-Type': 'application/json',
-      'Cache-Control': 'public, max-age=600',
-      'CDN-Cache-Control': 'public, max-age=600',
+      'Cache-Control': 'public, max-age=120',
+      'CDN-Cache-Control': 'public, max-age=120',
       'X-Cache': 'HIT',
       'X-Polymarket-Source': 'railway-cache',
     }, sliceToLimit(cached.data));
   }
 
-  // Circuit breaker open — serve stale cache or empty, skip upstream
-  if (Date.now() < polymarketCircuitBreaker.openUntil) {
-    if (cached) {
-      return sendCompressed(req, res, 200, {
-        'Content-Type': 'application/json',
-        'Cache-Control': 'no-store',
-        'X-Cache': 'STALE',
-        'X-Circuit': 'OPEN',
-        'X-Polymarket-Source': 'railway-stale',
-      }, cached.data);
-    }
-    return safeEnd(res, 200, { 'Content-Type': 'application/json', 'X-Circuit': 'OPEN' }, JSON.stringify([]));
-  }
+  const endpoint = url.searchParams.get('endpoint') || 'markets';
+  const params = new URLSearchParams();
+  params.set('closed', url.searchParams.get('closed') || 'false');
+  params.set('order', url.searchParams.get('order') || 'volume');
+  params.set('ascending', url.searchParams.get('ascending') || 'false');
+  const limit = Math.max(1, Math.min(100, parseInt(url.searchParams.get('limit') || '50', 10) || 50));
+  params.set('limit', String(limit));
+  const tag = url.searchParams.get('tag') || url.searchParams.get('tag_slug');
+  if (tag && endpoint === 'events') params.set('tag_slug', tag.replace(/[^a-z0-9-]/gi, '').slice(0, 100));
 
   let inflight = polymarketInflight.get(cacheKey);
   if (!inflight) {
@@ -3419,11 +3355,11 @@ function handlePolymarketRequest(req, res) {
     if (data) {
       sendCompressed(req, res, 200, {
         'Content-Type': 'application/json',
-        'Cache-Control': 'public, max-age=600',
-        'CDN-Cache-Control': 'public, max-age=600',
+        'Cache-Control': 'public, max-age=120',
+        'CDN-Cache-Control': 'public, max-age=120',
         'X-Cache': 'MISS',
         'X-Polymarket-Source': 'railway',
-      }, sliceToLimit(data));
+      }, data);
     } else if (cached) {
       sendCompressed(req, res, 200, {
         'Content-Type': 'application/json',
@@ -3431,7 +3367,7 @@ function handlePolymarketRequest(req, res) {
         'CDN-Cache-Control': 'no-store',
         'X-Cache': 'STALE',
         'X-Polymarket-Source': 'railway-stale',
-      }, sliceToLimit(cached.data));
+      }, cached.data);
     } else {
       safeEnd(res, 200, { 'Content-Type': 'application/json' }, JSON.stringify([]));
     }
@@ -3940,7 +3876,6 @@ const server = http.createServer(async (req, res) => {
         ucdp: ucdpCache.data ? 'warm' : 'cold',
         worldbank: worldbankCache.size,
         polymarket: polymarketCache.size,
-        yahooChart: yahooChartCache.size,
         polymarketInflight: polymarketInflight.size,
       },
       auth: {

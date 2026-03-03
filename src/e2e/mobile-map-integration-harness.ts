@@ -128,7 +128,6 @@ const layers = {
   renewableInstallations: false,
   tradeRoutes: false,
   iranAttacks: false,
-  dayNight: false,
 };
 
 await initI18n();

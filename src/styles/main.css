@@ -59,7 +59,7 @@
 }
 
 [dir="rtl"] {
-  --font-body: 'Geeza Pro', 'SF Arabic', 'Tahoma', system-ui, sans-serif;
+  --font-body: 'Tajawal', 'SF Arabic', 'Tahoma', system-ui, sans-serif;
 }
 
 :lang(zh-CN),
@@ -14010,7 +14010,6 @@ body.has-breaking-alert .panels-grid {
   .breaking-alert {
     animation: none;
   }
-
   .breaking-alert.severity-critical .breaking-alert-level {
     animation: none;
   }

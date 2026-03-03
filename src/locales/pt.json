@@ -64,48 +64,7 @@
     "polymarket": "Previsões",
     "climate": "Anomalias Climáticas",
     "liveWebcams": "Câmeras ao Vivo",
-    "securityAdvisories": "Alertas de Segurança",
-    "orefSirens": "Israel Sirens",
-    "telegramIntel": "Inteligência Telegram",
-    "giving": "Doações Globais",
-    "supplyChain": "Cadeia de Suprimentos",
-    "gulfEconomies": "Economias do Golfo",
-    "gulfIndices": "Índices do Golfo",
-    "gulfCurrencies": "Moedas do Golfo",
-    "gulfOil": "Petróleo do Golfo"
-  },
-  "commands": {
-    "prefixes": {
-      "map": "Mapa",
-      "panel": "Painel",
-      "brief": "Resumo"
-    },
-    "categories": {
-      "navigate": "Navegar",
-      "layers": "Camadas",
-      "panels": "Painéis",
-      "view": "Vista",
-      "actions": "Ações",
-      "country": "País"
-    },
-    "regions": {
-      "global": "Vista global",
-      "mena": "Médio Oriente e Norte de África",
-      "eu": "Europa",
-      "asia": "Ásia-Pacífico",
-      "america": "Américas",
-      "africa": "África",
-      "latam": "América Latina",
-      "oceania": "Oceânia"
-    },
-    "tips": {
-      "map": "Digite o nome de um país para voar até lá no mapa",
-      "panel": "Digite o nome de um painel para rolar até ele",
-      "brief": "Digite o nome de um país para um resumo de inteligência",
-      "layers": "Digite \"military\" ou \"finance\" para predefinições de camadas",
-      "time": "Digite \"1h\", \"24h\" ou \"7d\" para filtrar por tempo",
-      "settings": "Digite \"dark mode\", \"settings\" ou \"fullscreen\""
-    }
+    "securityAdvisories": "Alertas de Segurança"
   },
   "modals": {
     "search": {
@@ -1269,13 +1228,7 @@
       "regionLatinAmerica": "América Latina",
       "regionAsia": "Ásia",
       "regionMiddleEast": "Oriente Médio",
-      "regionAfrica": "África",
-      "regionOceania": "Oceania",
-      "botCheck": "O YouTube está solicitando login para reproduzir {{name}}",
-      "channelNotFound": "Canal do YouTube não encontrado",
-      "invalidHandle": "Insira um identificador válido do YouTube (ex. @NomeDoCanal)",
-      "signInToYouTube": "Entrar no YouTube",
-      "verifying": "Verificando…"
+      "regionAfrica": "África"
     },
     "securityAdvisories": {
       "loading": "Carregando alertas de viagem...",
@@ -1298,69 +1251,6 @@
         "daysAgo": "há {{count}} d"
       },
       "infoTooltip": "<strong>Alertas de Segurança</strong><br>Avisos de viagem e alertas de segurança de agências governamentais."
-    },
-    "orefSirens": {
-      "checking": "Checking siren alerts...",
-      "noAlerts": "No active sirens — all clear",
-      "notConfigured": "Sirens service not configured",
-      "activeSirens": "{{count}} active siren(s)",
-      "area": "Area",
-      "time": "Time",
-      "justNow": "just now",
-      "historyCount": "{{count}} alerts in last 24h",
-      "infoTooltip": "<strong>Israel Sirens</strong><br>Real-time rocket and missile siren alerts from Israel Home Front Command.<br><br>Data is polled every 10 seconds. A pulsing red indicator means active sirens are sounding.",
-      "historySummary": "{{count}} alertas em 24h — {{waves}} ondas",
-      "loadingHistory": "Carregando histórico..."
-    },
-    "breakingNews": {
-      "critical": "CRÍTICO",
-      "dismiss": "Dispensar",
-      "enableNotifications": "Ativar notificações na área de trabalho",
-      "high": "ALTO"
-    },
-    "giving": {
-      "activityIndex": "Índice de Atividade",
-      "cafIndex": "Índice CAF",
-      "candidGrants": "Subsídios Candid",
-      "category": "Categoria",
-      "cryptoDaily": "Crypto diário",
-      "dailyInflow": "Entrada 24h",
-      "dailyVol": "Vol. diário",
-      "dataLag": "Atraso dos dados",
-      "estDailyFlow": "Fluxo diário est.",
-      "freshness": "Dados",
-      "infoTooltip": "<strong>Índice de Atividade de Doações Globais</strong> Índice composto que acompanha doações pessoais em plataformas de financiamento coletivo e carteiras cripto.<ul><li><strong>Plataformas</strong>: amostragem de campanhas GoFundMe, GlobalGiving, JustGiving</li><li><strong>Crypto</strong>: entradas on-chain em carteiras de caridade (Endaoment, Giving Block)</li><li><strong>Institucional</strong>: APD da OCDE, Índice Mundial de Doações CAF, subsídios Candid</li></ul>O índice é direcional (não valores exatos). Combina amostragem ao vivo com relatórios anuais publicados.",
-      "oecdOda": "APD OCDE",
-      "ofTotal": "% do total",
-      "platform": "Plataforma",
-      "share": "Participação",
-      "tabs": {
-        "categories": "Categorias",
-        "crypto": "Crypto",
-        "institutional": "Institucional",
-        "platforms": "Plataformas"
-      },
-      "topReceivers": "Principais receptores",
-      "trend": "Tendência",
-      "trending": "TENDÊNCIA",
-      "velocity": "Velocidade",
-      "wallets": "Carteiras"
-    },
-    "supplyChain": {
-      "chokepoints": "Pontos de estrangulamento",
-      "fredKeyMissing": "Chave API FRED necessária para tarifas de frete — adicione nas Configurações. Pontos de estrangulamento e minerais disponíveis sem chave.",
-      "mineral": "Mineral",
-      "minerals": "Minerais",
-      "noChokepoints": "Dados de pontos de estrangulamento carregando...",
-      "noMinerals": "Dados de minerais carregando...",
-      "noShipping": "Dados de tarifas de frete não disponíveis",
-      "risk": "Risco",
-      "shipping": "Transporte marítimo",
-      "sources": "FRED / NGA / USGS",
-      "spikeAlert": "Pico detectado — tarifa significativamente acima da média de 52 semanas (semanal)",
-      "topProducers": "Principais produtores",
-      "upstreamUnavailable": "Dados da cadeia de suprimentos temporariamente indisponíveis — exibindo dados em cache",
-      "warnings": "aviso(s)"
     }
   },
   "popups": {
@@ -2010,9 +1900,7 @@
     "currentVariant": "(atual)",
     "retry": "Retry",
     "refresh": "Refresh",
-    "all": "Todos",
-    "loadingGiving": "Carregando dados de doações...",
-    "rateLimitedMarket": "Dados de mercado temporariamente limitados — tentando novamente automaticamente"
+    "all": "Todos"
   },
   "header": {
     "world": "MUNDO",

@@ -11,7 +11,6 @@ import type {
 } from '../../../../src/generated/server/worldmonitor/positive_events/v1/service_server';
 
 import { classifyNewsItem } from '../../../../src/services/positive-classifier';
-import { cachedFetchJson } from '../../../_shared/redis';
 import { markNoCacheResponse } from '../../../_shared/response-headers';
 
 const GDELT_GEO_URL = 'https://api.gdeltproject.org/api/v2/geo/geo';
@@ -90,33 +89,27 @@ export async function listPositiveGeoEvents(
   _req: ListPositiveGeoEventsRequest,
 ): Promise<ListPositiveGeoEventsResponse> {
   try {
-    const result = await cachedFetchJson<ListPositiveGeoEventsResponse>(REDIS_CACHE_KEY, REDIS_CACHE_TTL, async () => {
-      const allEvents: PositiveGeoEvent[] = [];
-      const seenNames = new Set<string>();
-      let anyQuerySucceeded = false;
+    const allEvents: PositiveGeoEvent[] = [];
+    const seenNames = new Set<string>();
+    let anyQuerySucceeded = false;
 
-      for (let i = 0; i < POSITIVE_QUERIES.length; i++) {
-        if (i > 0) {
-          await new Promise(r => setTimeout(r, 500));
-        }
-
-        try {
-          const events = await fetchGdeltGeoPositive(POSITIVE_QUERIES[i]!);
-          anyQuerySucceeded = true;
-          for (const event of events) {
-            if (!seenNames.has(event.name)) {
-              seenNames.add(event.name);
-              allEvents.push(event);
-            }
-          }
-        } catch {
-          // Individual query failure is non-fatal
-        }
+    for (let i = 0; i < POSITIVE_QUERIES.length; i++) {
+      if (i > 0) {
+        await new Promise(r => setTimeout(r, 500));
       }
 
-      return anyQuerySucceeded ? { events: allEvents } : null;
-    });
-    return result || { events: [] };
+      try {
+        const events = await fetchGdeltGeoPositive(POSITIVE_QUERIES[i]!);
+        anyQuerySucceeded = true;
+        for (const event of events) {
+          if (!seenNames.has(event.name)) {
+            seenNames.add(event.name);
+            allEvents.push(event);
+          }
+        }
+
+    if (!anyQuerySucceeded) markNoCacheResponse(ctx.request);
+    return { events: allEvents };
   } catch {
     markNoCacheResponse(ctx.request);
     return { events: [] };

@@ -470,15 +470,8 @@ const FULL_FEEDS: Record<string, Feed[]> = {
   us: [
     { name: 'Reuters US', url: rss('https://news.google.com/rss/search?q=site:reuters.com+US&hl=en-US&gl=US&ceid=US:en') },
     { name: 'NPR News', url: rss('https://feeds.npr.org/1001/rss.xml') },
-    { name: 'PBS NewsHour', url: rss('https://www.pbs.org/newshour/feeds/rss/headlines') },
-    { name: 'ABC News', url: rss('https://feeds.abcnews.com/abcnews/topstories') },
-    { name: 'CBS News', url: rss('https://www.cbsnews.com/latest/rss/main') },
-    { name: 'NBC News', url: rss('https://feeds.nbcnews.com/nbcnews/public/news') },
-    { name: 'Wall Street Journal', url: rss('https://feeds.content.dowjones.io/public/rss/RSSUSnews') },
-    { name: 'Politico', url: rss('https://rss.politico.com/politics-news.xml') },
-    { name: 'The Hill', url: rss('https://thehill.com/news/feed') },
+    { name: 'Politico', url: rss('https://news.google.com/rss/search?q=site:politico.com+when:1d&hl=en-US&gl=US&ceid=US:en') },
     { name: 'Axios', url: rss('https://api.axios.com/feed/') },
-    { name: 'Fox News', url: rss('https://moxie.foxnews.com/google-publisher/us.xml') },
   ],
   europe: [
     {

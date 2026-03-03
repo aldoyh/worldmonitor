@@ -210,48 +210,7 @@
     "gccInvestments": "Investissements du CCG",
     "geoHubs": "Centres géopolitiques",
     "liveWebcams": "Webcams en Direct",
-    "securityAdvisories": "Avis de Sécurité",
-    "orefSirens": "Israel Sirens",
-    "telegramIntel": "Renseignement Telegram",
-    "giving": "Dons mondiaux",
-    "supplyChain": "Chaîne d'approvisionnement",
-    "gulfEconomies": "Économies du Golfe",
-    "gulfIndices": "Indices du Golfe",
-    "gulfCurrencies": "Devises du Golfe",
-    "gulfOil": "Pétrole du Golfe"
-  },
-  "commands": {
-    "prefixes": {
-      "map": "Carte",
-      "panel": "Panneau",
-      "brief": "Dossier"
-    },
-    "categories": {
-      "navigate": "Naviguer",
-      "layers": "Couches",
-      "panels": "Panneaux",
-      "view": "Vue",
-      "actions": "Actions",
-      "country": "Pays"
-    },
-    "regions": {
-      "global": "Vue mondiale",
-      "mena": "Moyen-Orient et Afrique du Nord",
-      "eu": "Europe",
-      "asia": "Asie-Pacifique",
-      "america": "Amériques",
-      "africa": "Afrique",
-      "latam": "Amérique latine",
-      "oceania": "Océanie"
-    },
-    "tips": {
-      "map": "Saisissez un nom de pays pour y voler sur la carte",
-      "panel": "Saisissez un nom de panneau pour y défiler",
-      "brief": "Saisissez un nom de pays pour un rapport de renseignement",
-      "layers": "Saisissez \"military\" ou \"finance\" pour les préréglages de couches",
-      "time": "Saisissez \"1h\", \"24h\" ou \"7d\" pour filtrer par période",
-      "settings": "Saisissez \"dark mode\", \"settings\" ou \"fullscreen\""
-    }
+    "securityAdvisories": "Avis de Sécurité"
   },
   "modals": {
     "search": {
@@ -1415,13 +1374,7 @@
       "regionLatinAmerica": "Amérique latine",
       "regionAsia": "Asie",
       "regionMiddleEast": "Moyen-Orient",
-      "regionAfrica": "Afrique",
-      "regionOceania": "Océanie",
-      "botCheck": "YouTube demande une connexion pour lire {{name}}",
-      "channelNotFound": "Chaîne YouTube introuvable",
-      "invalidHandle": "Entrez un identifiant YouTube valide (ex. @NomDeLaChaine)",
-      "signInToYouTube": "Se connecter à YouTube",
-      "verifying": "Vérification…"
+      "regionAfrica": "Afrique"
     },
     "securityAdvisories": {
       "loading": "Chargement des avis de voyage...",
@@ -1444,69 +1397,6 @@
         "daysAgo": "il y a {{count}} j"
       },
       "infoTooltip": "<strong>Avis de Sécurité</strong><br>Avis aux voyageurs et alertes de sécurité des agences gouvernementales."
-    },
-    "orefSirens": {
-      "checking": "Checking siren alerts...",
-      "noAlerts": "No active sirens — all clear",
-      "notConfigured": "Sirens service not configured",
-      "activeSirens": "{{count}} active siren(s)",
-      "area": "Area",
-      "time": "Time",
-      "justNow": "just now",
-      "historyCount": "{{count}} alerts in last 24h",
-      "infoTooltip": "<strong>Israel Sirens</strong><br>Real-time rocket and missile siren alerts from Israel Home Front Command.<br><br>Data is polled every 10 seconds. A pulsing red indicator means active sirens are sounding.",
-      "historySummary": "{{count}} alertes en 24h — {{waves}} vagues",
-      "loadingHistory": "Chargement de l'historique..."
-    },
-    "breakingNews": {
-      "critical": "CRITIQUE",
-      "dismiss": "Fermer",
-      "enableNotifications": "Activer les notifications de bureau",
-      "high": "URGENT"
-    },
-    "giving": {
-      "activityIndex": "Indice d'activité",
-      "cafIndex": "Indice CAF",
-      "candidGrants": "Subventions Candid",
-      "category": "Catégorie",
-      "cryptoDaily": "Crypto quotidien",
-      "dailyInflow": "Flux entrant 24h",
-      "dailyVol": "Vol. quotidien",
-      "dataLag": "Délai des données",
-      "estDailyFlow": "Flux quotidien est.",
-      "freshness": "Données",
-      "infoTooltip": "<strong>Indice d'activité des dons mondiaux</strong> Indice composite suivant les dons personnels via les plateformes de financement participatif et les portefeuilles crypto.<ul><li><strong>Plateformes</strong> : échantillonnage de campagnes GoFundMe, GlobalGiving, JustGiving</li><li><strong>Crypto</strong> : flux entrants des portefeuilles caritatifs on-chain (Endaoment, Giving Block)</li><li><strong>Institutionnel</strong> : APD de l'OCDE, indice mondial CAF des dons, subventions Candid</li></ul>L'indice est directionnel (pas des montants exacts). Combine l'échantillonnage en direct avec les rapports annuels publiés.",
-      "oecdOda": "APD OCDE",
-      "ofTotal": "% du total",
-      "platform": "Plateforme",
-      "share": "Part",
-      "tabs": {
-        "categories": "Catégories",
-        "crypto": "Crypto",
-        "institutional": "Institutionnel",
-        "platforms": "Plateformes"
-      },
-      "topReceivers": "Principaux bénéficiaires",
-      "trend": "Tendance",
-      "trending": "TENDANCE",
-      "velocity": "Vélocité",
-      "wallets": "Portefeuilles"
-    },
-    "supplyChain": {
-      "chokepoints": "Points d'étranglement",
-      "fredKeyMissing": "Clé API FRED requise pour les tarifs d'expédition — ajoutez-la dans les Paramètres. Points d'étranglement et minéraux disponibles sans clé.",
-      "mineral": "Minéral",
-      "minerals": "Minéraux",
-      "noChokepoints": "Données des points d'étranglement en cours de chargement...",
-      "noMinerals": "Données minérales en cours de chargement...",
-      "noShipping": "Données de tarifs d'expédition non disponibles",
-      "risk": "Risque",
-      "shipping": "Transport maritime",
-      "sources": "FRED / NGA / USGS",
-      "spikeAlert": "Pic détecté — tarif nettement au-dessus de la moyenne sur 52 semaines (hebdomadaire)",
-      "topProducers": "Principaux producteurs",
-      "upstreamUnavailable": "Données de chaîne d'approvisionnement temporairement indisponibles — affichage des données en cache",
-      "warnings": "avertissement(s)"
     }
   },
   "popups": {
@@ -2156,8 +2046,6 @@
     "currentVariant": "(actuel)",
     "retry": "Retry",
     "refresh": "Refresh",
-    "all": "Tous",
-    "loadingGiving": "Chargement des données de dons...",
-    "rateLimitedMarket": "Données de marché temporairement limitées — nouvelle tentative automatique"
+    "all": "Tous"
   }
 }

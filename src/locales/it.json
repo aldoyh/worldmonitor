@@ -212,46 +212,7 @@
     "gccInvestments": "Investimenti GCC",
     "geoHubs": "Hotspot geopolitici",
     "liveWebcams": "Webcam in Diretta",
-    "securityAdvisories": "Avvisi di Sicurezza",
-    "orefSirens": "Israel Sirens",
-    "telegramIntel": "Intelligence Telegram",
-    "gulfEconomies": "Economie del Golfo",
-    "gulfIndices": "Indici del Golfo",
-    "gulfCurrencies": "Valute del Golfo",
-    "gulfOil": "Petrolio del Golfo"
-  },
-  "commands": {
-    "prefixes": {
-      "map": "Mappa",
-      "panel": "Pannello",
-      "brief": "Riepilogo"
-    },
-    "categories": {
-      "navigate": "Naviga",
-      "layers": "Livelli",
-      "panels": "Pannelli",
-      "view": "Vista",
-      "actions": "Azioni",
-      "country": "Paese"
-    },
-    "regions": {
-      "global": "Vista globale",
-      "mena": "Medio Oriente e Nord Africa",
-      "eu": "Europa",
-      "asia": "Asia-Pacifico",
-      "america": "Americhe",
-      "africa": "Africa",
-      "latam": "America Latina",
-      "oceania": "Oceania"
-    },
-    "tips": {
-      "map": "Digita il nome di un paese per raggiungerlo sulla mappa",
-      "panel": "Digita il nome di un pannello per scorrerci",
-      "brief": "Digita il nome di un paese per un briefing di intelligence",
-      "layers": "Digita \"military\" o \"finance\" per i preset dei livelli",
-      "time": "Digita \"1h\", \"24h\" o \"7d\" per filtrare per tempo",
-      "settings": "Digita \"dark mode\", \"settings\" o \"fullscreen\""
-    }
+    "securityAdvisories": "Avvisi di Sicurezza"
   },
   "modals": {
     "search": {
@@ -1467,11 +1428,7 @@
       "regionLatinAmerica": "America Latina",
       "regionAsia": "Asia",
       "regionMiddleEast": "Medio Oriente",
-      "regionAfrica": "Africa",
-      "regionOceania": "Oceania",
-      "invalidHandle": "Inserisci un handle YouTube valido (es. @NomeCanale)",
-      "channelNotFound": "Canale YouTube non trovato",
-      "verifying": "Verifica in corso…"
+      "regionAfrica": "Africa"
     },
     "securityAdvisories": {
       "loading": "Caricamento avvisi di viaggio...",
@@ -1494,19 +1451,6 @@
         "daysAgo": "{{count}} giorni fa"
       },
       "infoTooltip": "<strong>Avvisi di Sicurezza</strong><br>Avvisi di viaggio e allerte di sicurezza dalle agenzie governative."
-    },
-    "orefSirens": {
-      "checking": "Checking siren alerts...",
-      "noAlerts": "No active sirens — all clear",
-      "notConfigured": "Sirens service not configured",
-      "activeSirens": "{{count}} active siren(s)",
-      "area": "Area",
-      "time": "Time",
-      "justNow": "just now",
-      "historyCount": "{{count}} alerts in last 24h",
-      "historySummary": "{{count}} allerte in 24h — {{waves}} ondate",
-      "loadingHistory": "Caricamento cronologia...",
-      "infoTooltip": "<strong>Israel Sirens</strong><br>Real-time rocket and missile siren alerts from Israel Home Front Command.<br><br>Data is polled every 10 seconds. A pulsing red indicator means active sirens are sounding."
     }
   },
   "popups": {

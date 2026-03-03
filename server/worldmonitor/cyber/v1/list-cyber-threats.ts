@@ -52,8 +52,8 @@ export async function listCyberThreats(
   try {
     const now = Date.now();
 
+    const cacheKey = `${REDIS_CACHE_KEY}:${req.pageSize || 0}:${req.start || 0}:${req.type || ''}:${req.source || ''}:${req.minSeverity || ''}`;
     const pageSize = clampInt(req.pageSize, DEFAULT_LIMIT, 1, MAX_LIMIT);
-    const offset = parseCursor(req.cursor);
 
     // Cache key excludes pageSize and cursor — cache holds the full filtered result set.
     // Changing filter params (start, type, source, minSeverity) between pages resets pagination

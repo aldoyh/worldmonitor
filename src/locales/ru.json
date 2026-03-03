@@ -210,48 +210,7 @@
     "gccInvestments": "Инвестиции стран Залива",
     "geoHubs": "Геополитические хабы",
     "liveWebcams": "Веб-камеры",
-    "securityAdvisories": "Предупреждения безопасности",
-    "orefSirens": "Israel Sirens",
-    "telegramIntel": "Разведка Telegram",
-    "giving": "Глобальная благотворительность",
-    "supplyChain": "Цепочка поставок",
-    "gulfEconomies": "Экономика Залива",
-    "gulfIndices": "Индексы Залива",
-    "gulfCurrencies": "Валюты Залива",
-    "gulfOil": "Нефть Залива"
-  },
-  "commands": {
-    "prefixes": {
-      "map": "Карта",
-      "panel": "Панель",
-      "brief": "Сводка"
-    },
-    "categories": {
-      "navigate": "Навигация",
-      "layers": "Слои",
-      "panels": "Панели",
-      "view": "Вид",
-      "actions": "Действия",
-      "country": "Страна"
-    },
-    "regions": {
-      "global": "Глобальный обзор",
-      "mena": "Ближний Восток и Северная Африка",
-      "eu": "Европа",
-      "asia": "Азиатско-Тихоокеанский регион",
-      "america": "Америка",
-      "africa": "Африка",
-      "latam": "Латинская Америка",
-      "oceania": "Океания"
-    },
-    "tips": {
-      "map": "Введите название страны, чтобы перелететь к ней на карте",
-      "panel": "Введите название панели, чтобы прокрутить к ней",
-      "brief": "Введите название страны для разведывательной сводки",
-      "layers": "Введите \"military\" или \"finance\" для пресетов слоёв",
-      "time": "Введите \"1h\", \"24h\" или \"7d\" для фильтрации по времени",
-      "settings": "Введите \"dark mode\", \"settings\" или \"fullscreen\""
-    }
+    "securityAdvisories": "Предупреждения безопасности"
   },
   "modals": {
     "search": {
@@ -1415,13 +1374,7 @@
       "regionLatinAmerica": "Латинская Америка",
       "regionAsia": "Азия",
       "regionMiddleEast": "Ближний Восток",
-      "regionAfrica": "Африка",
-      "regionOceania": "Океания",
-      "botCheck": "YouTube запрашивает вход для воспроизведения {{name}}",
-      "channelNotFound": "YouTube-канал не найден",
-      "invalidHandle": "Введите корректный YouTube-дескриптор (например, @ChannelName)",
-      "signInToYouTube": "Войти в YouTube",
-      "verifying": "Проверка…"
+      "regionAfrica": "Африка"
     },
     "securityAdvisories": {
       "loading": "Загрузка предупреждений...",
@@ -1444,69 +1397,6 @@
         "daysAgo": "{{count}} дн. назад"
       },
       "infoTooltip": "<strong>Предупреждения безопасности</strong><br>Рекомендации по поездкам и предупреждения от государственных ведомств."
-    },
-    "orefSirens": {
-      "checking": "Checking siren alerts...",
-      "noAlerts": "No active sirens — all clear",
-      "notConfigured": "Sirens service not configured",
-      "activeSirens": "{{count}} active siren(s)",
-      "area": "Area",
-      "time": "Time",
-      "justNow": "just now",
-      "historyCount": "{{count}} alerts in last 24h",
-      "infoTooltip": "<strong>Israel Sirens</strong><br>Real-time rocket and missile siren alerts from Israel Home Front Command.<br><br>Data is polled every 10 seconds. A pulsing red indicator means active sirens are sounding.",
-      "historySummary": "{{count}} оповещений за 24ч — {{waves}} волн",
-      "loadingHistory": "Загрузка истории..."
-    },
-    "breakingNews": {
-      "critical": "СРОЧНО",
-      "dismiss": "Скрыть",
-      "enableNotifications": "Включить уведомления на рабочем столе",
-      "high": "ВАЖНО"
-    },
-    "giving": {
-      "activityIndex": "Индекс активности",
-      "cafIndex": "Индекс CAF",
-      "candidGrants": "Гранты Candid",
-      "category": "Категория",
-      "cryptoDaily": "Крипто за день",
-      "dailyInflow": "Приток за 24ч",
-      "dailyVol": "Дневной объём",
-      "dataLag": "Задержка данных",
-      "estDailyFlow": "Расч. дневной поток",
-      "freshness": "Данные",
-      "infoTooltip": "<strong>Глобальный индекс благотворительной активности</strong> Композитный индекс отслеживания частных пожертвований через краудфандинговые платформы и крипто-кошельки.<ul><li><strong>Платформы</strong>: Выборка кампаний GoFundMe, GlobalGiving, JustGiving</li><li><strong>Крипто</strong>: Ончейн-поступления в благотворительные кошельки (Endaoment, Giving Block)</li><li><strong>Институциональные</strong>: OECD ODA, CAF World Giving Index, гранты Candid</li></ul>Индекс показывает направление, а не точные суммы. Сочетает живую выборку с опубликованными годовыми отчётами.",
-      "oecdOda": "OECD ODA",
-      "ofTotal": "% от общего",
-      "platform": "Платформа",
-      "share": "Доля",
-      "tabs": {
-        "categories": "Категории",
-        "crypto": "Крипто",
-        "institutional": "Институциональные",
-        "platforms": "Платформы"
-      },
-      "topReceivers": "Крупнейшие получатели",
-      "trend": "Тренд",
-      "trending": "ТРЕНД",
-      "velocity": "Скорость",
-      "wallets": "Кошельки"
-    },
-    "supplyChain": {
-      "chokepoints": "Узкие места",
-      "fredKeyMissing": "Для ставок морских перевозок нужен API-ключ FRED — добавьте в Настройках. Узкие места и минералы доступны без ключа.",
-      "mineral": "Минерал",
-      "minerals": "Минералы",
-      "noChokepoints": "Загрузка данных по узким местам...",
-      "noMinerals": "Загрузка данных по минералам...",
-      "noShipping": "Данные о ставках морских перевозок недоступны",
-      "risk": "Риск",
-      "shipping": "Судоходство",
-      "sources": "FRED / NGA / USGS",
-      "spikeAlert": "Обнаружен всплеск — ставка значительно выше средней за 52 недели (еженедельно)",
-      "topProducers": "Крупнейшие производители",
-      "upstreamUnavailable": "Данные о цепочке поставок временно недоступны — показаны кэшированные данные",
-      "warnings": "предупреждений"
     }
   },
   "popups": {
@@ -2156,8 +2046,6 @@
     "currentVariant": "(текущий)",
     "retry": "Retry",
     "refresh": "Refresh",
-    "all": "Все",
-    "loadingGiving": "Загрузка данных о глобальной благотворительности",
-    "rateLimitedMarket": "Рыночные данные временно недоступны (ограничение запросов) — повторная попытка скоро"
+    "all": "Все"
   }
 }

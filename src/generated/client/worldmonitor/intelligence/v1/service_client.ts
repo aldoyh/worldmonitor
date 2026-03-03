@@ -282,9 +282,9 @@ export class IntelligenceServiceClient {
   }
 
   async getCountryIntelBrief(req: GetCountryIntelBriefRequest, options?: IntelligenceServiceCallOptions): Promise<GetCountryIntelBriefResponse> {
-    let path = "/api/intelligence/v1/get-country-intel-brief";
+    const path = "/api/intelligence/v1/get-country-intel-brief";
     const params = new URLSearchParams();
-    if (req.countryCode != null && req.countryCode !== "") params.set("country_code", String(req.countryCode));
+    if (req.countryCode != null && req.countryCode !== "") params.set("country_code", req.countryCode);
     const url = this.baseURL + path + (params.toString() ? "?" + params.toString() : "");
 
     const headers: Record<string, string> = {
@@ -325,30 +325,6 @@ export class IntelligenceServiceClient {
     const resp = await this.fetchFn(url, {
       method: "GET",
       headers,
-      signal: options?.signal,
-    });
-
-    if (!resp.ok) {
-      return this.handleError(resp);
-    }
-
-    return await resp.json() as SearchGdeltDocumentsResponse;
-  }
-
-  async deductSituation(req: DeductSituationRequest, options?: IntelligenceServiceCallOptions): Promise<DeductSituationResponse> {
-    let path = "/api/intelligence/v1/deduct-situation";
-    const url = this.baseURL + path;
-
-    const headers: Record<string, string> = {
-      "Content-Type": "application/json",
-      ...this.defaultHeaders,
-      ...options?.headers,
-    };
-
-    const resp = await this.fetchFn(url, {
-      method: "POST",
-      headers,
-      body: JSON.stringify(req),
       signal: options?.signal,
     });
 

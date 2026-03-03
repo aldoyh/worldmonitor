@@ -210,48 +210,7 @@
     "gccInvestments": "استثمارات دول الخليج",
     "geoHubs": "مراكز جيوسياسية",
     "liveWebcams": "كاميرات مباشرة",
-    "securityAdvisories": "تنبيهات أمنية",
-    "orefSirens": "Israel Sirens",
-    "telegramIntel": "استخبارات Telegram",
-    "giving": "العطاء العالمي",
-    "supplyChain": "سلسلة الإمداد",
-    "gulfEconomies": "اقتصادات الخليج",
-    "gulfIndices": "مؤشرات الخليج",
-    "gulfCurrencies": "عملات الخليج",
-    "gulfOil": "نفط الخليج"
-  },
-  "commands": {
-    "prefixes": {
-      "map": "خريطة",
-      "panel": "لوحة",
-      "brief": "موجز"
-    },
-    "categories": {
-      "navigate": "تنقل",
-      "layers": "طبقات",
-      "panels": "لوحات",
-      "view": "عرض",
-      "actions": "إجراءات",
-      "country": "دولة"
-    },
-    "regions": {
-      "global": "عرض عالمي",
-      "mena": "الشرق الأوسط وشمال أفريقيا",
-      "eu": "أوروبا",
-      "asia": "آسيا والمحيط الهادئ",
-      "america": "الأمريكتان",
-      "africa": "أفريقيا",
-      "latam": "أمريكا اللاتينية",
-      "oceania": "أوقيانوسيا"
-    },
-    "tips": {
-      "map": "اكتب اسم دولة للانتقال إليها على الخريطة",
-      "panel": "اكتب اسم لوحة للتمرير إليها",
-      "brief": "اكتب اسم دولة للحصول على ملخص استخباراتي",
-      "layers": "اكتب \"military\" أو \"finance\" لتحميل طبقات مسبقة",
-      "time": "اكتب \"1h\" أو \"24h\" أو \"7d\" للتصفية حسب الوقت",
-      "settings": "اكتب \"dark mode\" أو \"settings\" أو \"fullscreen\""
-    }
+    "securityAdvisories": "تنبيهات أمنية"
   },
   "modals": {
     "search": {
@@ -1415,13 +1374,7 @@
       "regionLatinAmerica": "أمريكا اللاتينية",
       "regionAsia": "آسيا",
       "regionMiddleEast": "الشرق الأوسط",
-      "regionAfrica": "أفريقيا",
-      "regionOceania": "أوقيانوسيا",
-      "botCheck": "يطلب YouTube تسجيل الدخول لتشغيل {{name}}",
-      "channelNotFound": "لم يتم العثور على قناة YouTube",
-      "invalidHandle": "أدخل معرّف YouTube صالح (مثال: @ChannelName)",
-      "signInToYouTube": "تسجيل الدخول إلى YouTube",
-      "verifying": "جارٍ التحقق…"
+      "regionAfrica": "أفريقيا"
     },
     "securityAdvisories": {
       "loading": "جاري جلب التحذيرات الأمنية...",
@@ -1444,69 +1397,6 @@
         "daysAgo": "منذ {{count}} يوم"
       },
       "infoTooltip": "<strong>تنبيهات أمنية</strong><br>تحذيرات السفر والتنبيهات الأمنية من الوكالات الحكومية."
-    },
-    "orefSirens": {
-      "checking": "Checking siren alerts...",
-      "noAlerts": "No active sirens — all clear",
-      "notConfigured": "Sirens service not configured",
-      "activeSirens": "{{count}} active siren(s)",
-      "area": "Area",
-      "time": "Time",
-      "justNow": "just now",
-      "historyCount": "{{count}} alerts in last 24h",
-      "infoTooltip": "<strong>Israel Sirens</strong><br>Real-time rocket and missile siren alerts from Israel Home Front Command.<br><br>Data is polled every 10 seconds. A pulsing red indicator means active sirens are sounding.",
-      "historySummary": "{{count}} تنبيه خلال 24 ساعة — {{waves}} موجات",
-      "loadingHistory": "جارٍ تحميل السجل..."
-    },
-    "breakingNews": {
-      "critical": "حرج",
-      "dismiss": "تجاهل",
-      "enableNotifications": "تفعيل إشعارات سطح المكتب",
-      "high": "مرتفع"
-    },
-    "giving": {
-      "activityIndex": "مؤشر النشاط",
-      "cafIndex": "مؤشر CAF",
-      "candidGrants": "منح Candid",
-      "category": "الفئة",
-      "cryptoDaily": "العملات الرقمية يومياً",
-      "dailyInflow": "التدفق خلال 24 ساعة",
-      "dailyVol": "الحجم اليومي",
-      "dataLag": "تأخر البيانات",
-      "estDailyFlow": "التدفق اليومي المقدّر",
-      "freshness": "البيانات",
-      "infoTooltip": "<strong>مؤشر نشاط العطاء العالمي</strong> مؤشر مركّب يتتبع العطاء الشخصي عبر منصات التمويل الجماعي ومحافظ العملات الرقمية.<ul><li><strong>المنصات</strong>: عيّنات من حملات GoFundMe وGlobalGiving وJustGiving</li><li><strong>العملات الرقمية</strong>: تدفقات محافظ خيرية على السلسلة (Endaoment وGiving Block)</li><li><strong>المؤسسات</strong>: OECD ODA ومؤشر CAF للعطاء العالمي ومنح Candid</li></ul>المؤشر توجيهي (ليس مبالغ دقيقة بالدولار). يجمع بين العيّنات الحية والتقارير السنوية المنشورة.",
-      "oecdOda": "OECD ODA",
-      "ofTotal": "% من الإجمالي",
-      "platform": "المنصة",
-      "share": "الحصة",
-      "tabs": {
-        "categories": "الفئات",
-        "crypto": "العملات الرقمية",
-        "institutional": "المؤسسي",
-        "platforms": "المنصات"
-      },
-      "topReceivers": "أكبر المتلقين",
-      "trend": "الاتجاه",
-      "trending": "رائج",
-      "velocity": "السرعة",
-      "wallets": "المحافظ"
-    },
-    "supplyChain": {
-      "chokepoints": "نقاط الاختناق",
-      "fredKeyMissing": "مفتاح FRED API مطلوب لأسعار الشحن — أضفه في الإعدادات. نقاط الاختناق والمعادن متاحة بدون مفتاح.",
-      "mineral": "المعدن",
-      "minerals": "المعادن",
-      "noChokepoints": "جارٍ تحميل بيانات نقاط الاختناق...",
-      "noMinerals": "جارٍ تحميل بيانات المعادن...",
-      "noShipping": "بيانات أسعار الشحن غير متاحة",
-      "risk": "المخاطر",
-      "shipping": "الشحن",
-      "sources": "FRED / NGA / USGS",
-      "spikeAlert": "تم رصد ارتفاع حاد — المعدل أعلى بكثير من متوسط 52 أسبوع (أسبوعي)",
-      "topProducers": "أكبر المنتجين",
-      "upstreamUnavailable": "بيانات سلسلة الإمداد غير متاحة مؤقتاً — عرض البيانات المخزنة",
-      "warnings": "تحذير(ات)"
     }
   },
   "popups": {
@@ -2156,8 +2046,6 @@
     "currentVariant": "(الحالي)",
     "retry": "Retry",
     "refresh": "Refresh",
-    "all": "الكل",
-    "loadingGiving": "جارٍ تحميل بيانات العطاء العالمي",
-    "rateLimitedMarket": "بيانات السوق غير متاحة مؤقتاً (تقييد معدل الطلبات) — ستتم إعادة المحاولة قريباً"
+    "all": "الكل"
   }
 }

@@ -1,6 +1,5 @@
 import type { BreakingAlert } from '@/services/breaking-news-alerts';
 import { getAlertSettings } from '@/services/breaking-news-alerts';
-import { getSourcePanelId } from '@/config/feeds';
 import { t } from '@/services/i18n';
 
 const MAX_ALERTS = 3;
@@ -48,17 +47,14 @@ export class BreakingNewsBanner {
 
     this.container.addEventListener('click', (e) => {
       const target = e.target as HTMLElement;
-      const alertEl = target.closest('.breaking-alert') as HTMLElement | null;
-      if (!alertEl) return;
-
-      if (target.closest('.breaking-alert-dismiss')) {
-        const id = alertEl.getAttribute('data-alert-id');
-        if (id) this.dismissAlert(id);
-        return;
+      const dismissBtn = target.closest('.breaking-alert-dismiss');
+      if (dismissBtn) {
+        const alertEl = dismissBtn.closest('.breaking-alert');
+        if (alertEl) {
+          const id = alertEl.getAttribute('data-alert-id');
+          if (id) this.dismissAlert(id);
+        }
       }
-
-      const panelId = alertEl.getAttribute('data-target-panel');
-      if (panelId) this.scrollToPanel(panelId);
     });
   }
 
@@ -72,7 +68,7 @@ export class BreakingNewsBanner {
     if (!settings.soundEnabled || !this.audio) return;
     if (Date.now() - this.lastSoundMs < SOUND_COOLDOWN_MS) return;
     this.audio.currentTime = 0;
-    this.audio.play()?.catch(() => {});
+    this.audio.play().catch(() => {});
     this.lastSoundMs = Date.now();
   }
 
@@ -97,7 +93,7 @@ export class BreakingNewsBanner {
 
   private updatePosition(): void {
     let top = 50;
-    if (document.body?.classList.contains('has-critical-banner')) {
+    if (document.body.classList.contains('has-critical-banner')) {
       this.attachResizeObserverIfNeeded();
       const postureBanner = document.querySelector('.critical-posture-banner');
       if (postureBanner) {
@@ -114,7 +110,7 @@ export class BreakingNewsBanner {
       '--breaking-alert-offset',
       height > 0 ? `${height}px` : '0px'
     );
-    document.body?.classList.toggle('has-breaking-alert', this.activeAlerts.length > 0);
+    document.body.classList.toggle('has-breaking-alert', this.activeAlerts.length > 0);
   }
 
   private isDismissedRecently(id: string): boolean {
@@ -169,26 +165,10 @@ export class BreakingNewsBanner {
     this.updateOffset();
   }
 
-  private resolveTargetPanel(alert: BreakingAlert): string {
-    if (alert.origin === 'oref_siren') return 'oref-sirens';
-    if (alert.origin === 'rss_alert') return getSourcePanelId(alert.source);
-    return 'politics';
-  }
-
-  private scrollToPanel(panelId: string): void {
-    const panel = document.querySelector(`[data-panel="${panelId}"]`);
-    if (!panel) return;
-    panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    panel.classList.add('flash-highlight');
-    setTimeout(() => panel.classList.remove('flash-highlight'), 1500);
-  }
-
   private createAlertElement(alert: BreakingAlert): HTMLElement {
     const el = document.createElement('div');
     el.className = `breaking-alert severity-${alert.threatLevel}`;
     el.setAttribute('data-alert-id', alert.id);
-    el.setAttribute('data-target-panel', this.resolveTargetPanel(alert));
-    el.style.cursor = 'pointer';
 
     const icon = alert.threatLevel === 'critical' ? '🚨' : '⚠️';
     const levelText = alert.threatLevel === 'critical'

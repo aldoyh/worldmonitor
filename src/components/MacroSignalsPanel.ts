@@ -157,7 +157,6 @@ export class MacroSignalsPanel extends Panel {
         break;
       } catch (err) {
         if (this.isAbortError(err)) return false;
-        if (!this.element?.isConnected) return false;
         if (attempt < 2) {
           this.showRetrying();
           await new Promise(r => setTimeout(r, 20_000));

@@ -45,18 +45,54 @@ export class RefreshScheduler implements AppModule {
     intervalMs: number,
     condition?: () => boolean
   ): void {
-    this.refreshRunners.get(name)?.loop.stop();
+    const HIDDEN_REFRESH_MULTIPLIER = 10;
+    const JITTER_FRACTION = 0.1;
+    const MIN_REFRESH_MS = 1000;
+    // Max effective interval: intervalMs * 4 (backoff) * 10 (hidden) = 40x base
+    const MAX_BACKOFF_MULTIPLIER = 4;
 
-    const loop = startSmartPollLoop(async () => {
+    let currentMultiplier = 1;
+
+    const computeDelay = (baseMs: number, isHidden: boolean) => {
+      const adjusted = baseMs * (isHidden ? HIDDEN_REFRESH_MULTIPLIER : 1);
+      const jitterRange = adjusted * JITTER_FRACTION;
+      const jittered = adjusted + (Math.random() * 2 - 1) * jitterRange;
+      return Math.max(MIN_REFRESH_MS, Math.round(jittered));
+    };
+    const scheduleNext = (delay: number) => {
       if (this.ctx.isDestroyed) return;
-      if (condition && !condition()) return;
-      if (this.ctx.inFlight.has(name)) return;
-
+      const timeoutId = setTimeout(run, delay);
+      this.refreshTimeoutIds.set(name, timeoutId);
+    };
+    const run = async () => {
+      if (this.ctx.isDestroyed) return;
+      const isHidden = document.visibilityState === 'hidden';
+      if (isHidden) {
+        scheduleNext(computeDelay(intervalMs * currentMultiplier, true));
+        return;
+      }
+      if (condition && !condition()) {
+        scheduleNext(computeDelay(intervalMs * currentMultiplier, false));
+        return;
+      }
+      if (this.ctx.inFlight.has(name)) {
+        scheduleNext(computeDelay(intervalMs * currentMultiplier, false));
+        return;
+      }
       this.ctx.inFlight.add(name);
       try {
-        return await fn();
+        const changed = await fn();
+        if (changed === false) {
+          currentMultiplier = Math.min(currentMultiplier * 2, MAX_BACKOFF_MULTIPLIER);
+        } else {
+          currentMultiplier = 1;
+        }
+      } catch (e) {
+        console.error(`[App] Refresh ${name} failed:`, e);
+        currentMultiplier = 1;
       } finally {
         this.ctx.inFlight.delete(name);
+        scheduleNext(computeDelay(intervalMs * currentMultiplier, false));
       }
     }, {
       intervalMs,

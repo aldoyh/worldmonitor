@@ -62,7 +62,6 @@ export class ServiceStatusPanel extends Panel {
       return changed;
     } catch (err) {
       if (this.isAbortError(err)) return false;
-      if (!this.element?.isConnected) return false;
       this.error = err instanceof Error ? err.message : 'Failed to fetch';
       console.error('[ServiceStatus] Fetch error:', err);
       return true;

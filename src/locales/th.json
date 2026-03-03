@@ -210,48 +210,7 @@
     "gccInvestments": "การลงทุน GCC",
     "geoHubs": "ศูนย์กลางภูมิรัฐศาสตร์",
     "liveWebcams": "เว็บแคมสด",
-    "securityAdvisories": "คำเตือนด้านความปลอดภัย",
-    "orefSirens": "Israel Sirens",
-    "telegramIntel": "ข่าวกรอง Telegram",
-    "giving": "การบริจาคทั่วโลก",
-    "supplyChain": "ห่วงโซ่อุปทาน",
-    "gulfEconomies": "เศรษฐกิจอ่าว",
-    "gulfIndices": "ดัชนีอ่าว",
-    "gulfCurrencies": "สกุลเงินอ่าว",
-    "gulfOil": "น้ำมันอ่าว"
-  },
-  "commands": {
-    "prefixes": {
-      "map": "แผนที่",
-      "panel": "แผง",
-      "brief": "สรุป"
-    },
-    "categories": {
-      "navigate": "นำทาง",
-      "layers": "เลเยอร์",
-      "panels": "แผง",
-      "view": "มุมมอง",
-      "actions": "การดำเนินการ",
-      "country": "ประเทศ"
-    },
-    "regions": {
-      "global": "มุมมองทั่วโลก",
-      "mena": "ตะวันออกกลางและแอฟริกาเหนือ",
-      "eu": "ยุโรป",
-      "asia": "เอเชียแปซิฟิก",
-      "america": "อเมริกา",
-      "africa": "แอฟริกา",
-      "latam": "ละตินอเมริกา",
-      "oceania": "โอเชียเนีย"
-    },
-    "tips": {
-      "map": "พิมพ์ชื่อประเทศเพื่อบินไปยังตำแหน่งบนแผนที่",
-      "panel": "พิมพ์ชื่อแผงเพื่อเลื่อนไปยังแผงนั้น",
-      "brief": "พิมพ์ชื่อประเทศเพื่อดูรายงานข่าวกรอง",
-      "layers": "พิมพ์ \"military\" หรือ \"finance\" สำหรับชุดเลเยอร์สำเร็จรูป",
-      "time": "พิมพ์ \"1h\", \"24h\" หรือ \"7d\" เพื่อกรองตามเวลา",
-      "settings": "พิมพ์ \"dark mode\", \"settings\" หรือ \"fullscreen\""
-    }
+    "securityAdvisories": "คำเตือนด้านความปลอดภัย"
   },
   "modals": {
     "search": {
@@ -1415,13 +1374,7 @@
       "regionLatinAmerica": "ละตินอเมริกา",
       "regionAsia": "เอเชีย",
       "regionMiddleEast": "ตะวันออกกลาง",
-      "regionAfrica": "แอฟริกา",
-      "regionOceania": "โอเชียเนีย",
-      "botCheck": "YouTube กำลังขอให้ลงชื่อเข้าใช้เพื่อเล่น {{name}}",
-      "channelNotFound": "ไม่พบช่อง YouTube",
-      "invalidHandle": "ป้อนแฮนเดิล YouTube ที่ถูกต้อง (เช่น @ชื่อช่อง)",
-      "signInToYouTube": "ลงชื่อเข้าใช้ YouTube",
-      "verifying": "กำลังตรวจสอบ…"
+      "regionAfrica": "แอฟริกา"
     },
     "securityAdvisories": {
       "loading": "กำลังโหลดคำเตือนการเดินทาง...",
@@ -1444,69 +1397,6 @@
         "daysAgo": "{{count}} วันที่แล้ว"
       },
       "infoTooltip": "<strong>คำเตือนด้านความปลอดภัย</strong><br>คำเตือนการเดินทางและความปลอดภัยจากหน่วยงานรัฐบาล."
-    },
-    "orefSirens": {
-      "checking": "Checking siren alerts...",
-      "noAlerts": "No active sirens — all clear",
-      "notConfigured": "Sirens service not configured",
-      "activeSirens": "{{count}} active siren(s)",
-      "area": "Area",
-      "time": "Time",
-      "justNow": "just now",
-      "historyCount": "{{count}} alerts in last 24h",
-      "infoTooltip": "<strong>Israel Sirens</strong><br>Real-time rocket and missile siren alerts from Israel Home Front Command.<br><br>Data is polled every 10 seconds. A pulsing red indicator means active sirens are sounding.",
-      "historySummary": "{{count}} การแจ้งเตือนใน 24 ชม. — {{waves}} ระลอก",
-      "loadingHistory": "กำลังโหลดประวัติ..."
-    },
-    "breakingNews": {
-      "critical": "วิกฤต",
-      "dismiss": "ปิด",
-      "enableNotifications": "เปิดใช้งานการแจ้งเตือนบนเดสก์ท็อป",
-      "high": "สูง"
-    },
-    "giving": {
-      "activityIndex": "ดัชนีกิจกรรม",
-      "cafIndex": "ดัชนี CAF",
-      "candidGrants": "ทุน Candid",
-      "category": "หมวดหมู่",
-      "cryptoDaily": "คริปโตรายวัน",
-      "dailyInflow": "เงินเข้า 24 ชม.",
-      "dailyVol": "ปริมาณรายวัน",
-      "dataLag": "ความล่าช้าของข้อมูล",
-      "estDailyFlow": "กระแสรายวันโดยประมาณ",
-      "freshness": "ข้อมูล",
-      "infoTooltip": "<strong>ดัชนีกิจกรรมการบริจาคทั่วโลก</strong> ดัชนีรวมที่ติดตามการบริจาคส่วนบุคคลผ่านแพลตฟอร์มระดมทุนและกระเป๋าเงินคริปโต<ul><li><strong>แพลตฟอร์ม</strong>: GoFundMe, GlobalGiving, JustGiving สุ่มตัวอย่างแคมเปญ</li><li><strong>คริปโต</strong>: เงินเข้ากระเป๋าการกุศลบนเชน (Endaoment, Giving Block)</li><li><strong>สถาบัน</strong>: OECD ODA, CAF World Giving Index, ทุน Candid</li></ul>ดัชนีเป็นตัวชี้ทิศทาง (ไม่ใช่จำนวนเงินที่แน่นอน) รวมการสุ่มตัวอย่างแบบเรียลไทม์กับรายงานประจำปีที่เผยแพร่",
-      "oecdOda": "OECD ODA",
-      "ofTotal": "% ของทั้งหมด",
-      "platform": "แพลตฟอร์ม",
-      "share": "สัดส่วน",
-      "tabs": {
-        "categories": "หมวดหมู่",
-        "crypto": "คริปโต",
-        "institutional": "สถาบัน",
-        "platforms": "แพลตฟอร์ม"
-      },
-      "topReceivers": "ผู้รับสูงสุด",
-      "trend": "แนวโน้ม",
-      "trending": "เทรนด์",
-      "velocity": "ความเร็ว",
-      "wallets": "กระเป๋าเงิน"
-    },
-    "supplyChain": {
-      "chokepoints": "จุดคอขวด",
-      "fredKeyMissing": "ต้องการคีย์ API ของ FRED สำหรับอัตราค่าขนส่ง — เพิ่มในการตั้งค่า จุดคอขวดและแร่ธาตุใช้ได้โดยไม่ต้องมีคีย์",
-      "mineral": "แร่ธาตุ",
-      "minerals": "แร่ธาตุ",
-      "noChokepoints": "กำลังโหลดข้อมูลจุดคอขวด...",
-      "noMinerals": "กำลังโหลดข้อมูลแร่ธาตุ...",
-      "noShipping": "ข้อมูลอัตราค่าขนส่งไม่พร้อมใช้งาน",
-      "risk": "ความเสี่ยง",
-      "shipping": "การขนส่ง",
-      "sources": "FRED / NGA / USGS",
-      "spikeAlert": "ตรวจพบการพุ่งสูง — อัตราสูงกว่าค่าเฉลี่ย 52 สัปดาห์อย่างมีนัยสำคัญ (รายสัปดาห์)",
-      "topProducers": "ผู้ผลิตรายใหญ่",
-      "upstreamUnavailable": "ข้อมูลห่วงโซ่อุปทานไม่พร้อมใช้งานชั่วคราว — แสดงข้อมูลจากแคช",
-      "warnings": "คำเตือน"
     }
   },
   "popups": {
@@ -2156,8 +2046,6 @@
     "currentVariant": "(ปัจจุบัน)",
     "retry": "ลองใหม่",
     "refresh": "รีเฟรช",
-    "all": "ทั้งหมด",
-    "loadingGiving": "กำลังโหลดข้อมูลการบริจาคทั่วโลก",
-    "rateLimitedMarket": "ข้อมูลตลาดไม่พร้อมใช้งานชั่วคราว (ถูกจำกัดอัตรา) — กำลังลองใหม่ในไม่ช้า"
+    "all": "ทั้งหมด"
   }
 }

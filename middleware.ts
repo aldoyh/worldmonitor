@@ -11,11 +11,15 @@ const PUBLIC_API_PATHS = new Set(['/api/version']);
 const SOCIAL_IMAGE_UA =
   /Slack-ImgProxy|Slackbot|twitterbot|facebookexternalhit|linkedinbot|telegrambot|whatsapp|discordbot|redditbot/i;
 
-const VARIANT_HOST_MAP: Record<string, string> = {
-  'tech.worldmonitor.app': 'tech',
-  'finance.worldmonitor.app': 'finance',
-  'happy.worldmonitor.app': 'happy',
-};
+export default function middleware(request: Request) {
+  const url = new URL(request.url);
+
+  if (url.hostname === 'api.worldmonitor.app') {
+    return;
+  }
+
+  const ua = request.headers.get('user-agent') ?? '';
+  const path = url.pathname;
 
 // Source of truth: src/config/variant-meta.ts — keep in sync when variant metadata changes.
 const VARIANT_OG: Record<string, { title: string; description: string; image: string; url: string }> = {

@@ -368,12 +368,6 @@ export function createIntelligenceServiceRoutes(
           const body: GetCountryIntelBriefRequest = {
             countryCode: params.get("country_code") ?? "",
           };
-          if (options?.validateRequest) {
-            const bodyViolations = options.validateRequest("getCountryIntelBrief", body);
-            if (bodyViolations) {
-              throw new ValidationError(bodyViolations);
-            }
-          }
 
           const ctx: ServerContext = {
             request: req,

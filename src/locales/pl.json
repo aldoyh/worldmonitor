@@ -210,48 +210,7 @@
     "gccInvestments": "Inwestycje GCC",
     "geoHubs": "Geopolitical Hotspots",
     "liveWebcams": "Kamery na Żywo",
-    "securityAdvisories": "Ostrzeżenia Bezpieczeństwa",
-    "orefSirens": "Israel Sirens",
-    "telegramIntel": "Wywiad Telegram",
-    "giving": "Globalna Dobroczynność",
-    "supplyChain": "Łańcuch Dostaw",
-    "gulfEconomies": "Gospodarka Zatoki",
-    "gulfIndices": "Indeksy Zatoki",
-    "gulfCurrencies": "Waluty Zatoki",
-    "gulfOil": "Ropa Zatoki"
-  },
-  "commands": {
-    "prefixes": {
-      "map": "Mapa",
-      "panel": "Panel",
-      "brief": "Podsumowanie"
-    },
-    "categories": {
-      "navigate": "Nawigacja",
-      "layers": "Warstwy",
-      "panels": "Panele",
-      "view": "Widok",
-      "actions": "Akcje",
-      "country": "Kraj"
-    },
-    "regions": {
-      "global": "Widok globalny",
-      "mena": "Bliski Wschód i Afryka Północna",
-      "eu": "Europa",
-      "asia": "Azja i Pacyfik",
-      "america": "Ameryka",
-      "africa": "Afryka",
-      "latam": "Ameryka Łacińska",
-      "oceania": "Oceania"
-    },
-    "tips": {
-      "map": "Wpisz nazwę kraju, aby przenieść się tam na mapie",
-      "panel": "Wpisz nazwę panelu, aby do niego przewinąć",
-      "brief": "Wpisz nazwę kraju, aby uzyskać raport wywiadowczy",
-      "layers": "Wpisz \"military\" lub \"finance\", aby zastosować predefiniowane warstwy",
-      "time": "Wpisz \"1h\", \"24h\" lub \"7d\", aby filtrować według czasu",
-      "settings": "Wpisz \"dark mode\", \"settings\" lub \"fullscreen\""
-    }
+    "securityAdvisories": "Ostrzeżenia Bezpieczeństwa"
   },
   "modals": {
     "search": {
@@ -1415,13 +1374,7 @@
       "regionLatinAmerica": "Ameryka Łacińska",
       "regionAsia": "Azja",
       "regionMiddleEast": "Bliski Wschód",
-      "regionAfrica": "Afryka",
-      "regionOceania": "Oceania",
-      "botCheck": "YouTube wymaga zalogowania, aby odtworzyć {{name}}",
-      "channelNotFound": "Nie znaleziono kanału YouTube",
-      "invalidHandle": "Wprowadź prawidłowy identyfikator YouTube (np. @NazwaKanału)",
-      "signInToYouTube": "Zaloguj się do YouTube",
-      "verifying": "Weryfikowanie…"
+      "regionAfrica": "Afryka"
     },
     "securityAdvisories": {
       "loading": "Ładowanie ostrzeżeń podróżnych...",
@@ -1444,69 +1397,6 @@
         "daysAgo": "{{count}} dni temu"
       },
       "infoTooltip": "<strong>Ostrzeżenia Bezpieczeństwa</strong><br>Ostrzeżenia podróżne i alerty bezpieczeństwa z agencji rządowych."
-    },
-    "orefSirens": {
-      "checking": "Checking siren alerts...",
-      "noAlerts": "No active sirens — all clear",
-      "notConfigured": "Sirens service not configured",
-      "activeSirens": "{{count}} active siren(s)",
-      "area": "Area",
-      "time": "Time",
-      "justNow": "just now",
-      "historyCount": "{{count}} alerts in last 24h",
-      "infoTooltip": "<strong>Israel Sirens</strong><br>Real-time rocket and missile siren alerts from Israel Home Front Command.<br><br>Data is polled every 10 seconds. A pulsing red indicator means active sirens are sounding.",
-      "historySummary": "{{count}} alertów w 24h — {{waves}} fal",
-      "loadingHistory": "Ładowanie historii..."
-    },
-    "breakingNews": {
-      "critical": "KRYTYCZNY",
-      "dismiss": "Odrzuć",
-      "enableNotifications": "Włącz powiadomienia na pulpicie",
-      "high": "WYSOKI"
-    },
-    "giving": {
-      "activityIndex": "Indeks aktywności",
-      "cafIndex": "Indeks CAF",
-      "candidGrants": "Granty Candid",
-      "category": "Kategoria",
-      "cryptoDaily": "Krypto dziennie",
-      "dailyInflow": "Wpływ 24h",
-      "dailyVol": "Dz. wolumen",
-      "dataLag": "Opóźnienie danych",
-      "estDailyFlow": "Szan. dzienny przepływ",
-      "freshness": "Dane",
-      "infoTooltip": "<strong>Globalny indeks aktywności dobroczynnej</strong> Złożony indeks śledzący darowizny osobiste na platformach crowdfundingowych i portfelach kryptowalut.<ul><li><strong>Platformy</strong>: GoFundMe, GlobalGiving, JustGiving — próbkowanie kampanii</li><li><strong>Krypto</strong>: Wpływy do portfeli charytatywnych on-chain (Endaoment, Giving Block)</li><li><strong>Instytucjonalny</strong>: OECD ODA, CAF World Giving Index, granty Candid</li></ul>Indeks jest kierunkowy (nie dokładne kwoty). Łączy próbkowanie na żywo z publikowanymi raportami rocznymi.",
-      "oecdOda": "OECD ODA",
-      "ofTotal": "% całości",
-      "platform": "Platforma",
-      "share": "Udział",
-      "tabs": {
-        "categories": "Kategorie",
-        "crypto": "Krypto",
-        "institutional": "Instytucjonalny",
-        "platforms": "Platformy"
-      },
-      "topReceivers": "Najwięksi odbiorcy",
-      "trend": "Trend",
-      "trending": "TREND",
-      "velocity": "Prędkość",
-      "wallets": "Portfele"
-    },
-    "supplyChain": {
-      "chokepoints": "Wąskie gardła",
-      "fredKeyMissing": "Klucz API FRED wymagany do stawek frachtowych — dodaj go w Ustawieniach. Wąskie gardła i minerały dostępne bez klucza.",
-      "mineral": "Minerał",
-      "minerals": "Minerały",
-      "noChokepoints": "Dane o wąskich gardłach ładują się...",
-      "noMinerals": "Dane o minerałach ładują się...",
-      "noShipping": "Dane o stawkach frachtowych niedostępne",
-      "risk": "Ryzyko",
-      "shipping": "Transport morski",
-      "sources": "FRED / NGA / USGS",
-      "spikeAlert": "Wykryto skok — stawka znacznie powyżej 52-tygodniowej średniej (tygodniowo)",
-      "topProducers": "Najwięksi producenci",
-      "upstreamUnavailable": "Dane łańcucha dostaw tymczasowo niedostępne — wyświetlanie danych z pamięci podręcznej",
-      "warnings": "ostrzeżenie(a)"
     }
   },
   "popups": {
@@ -2156,8 +2046,6 @@
     "currentVariant": "(bieżący)",
     "retry": "Retry",
     "refresh": "Refresh",
-    "all": "Wszystkie",
-    "loadingGiving": "Ładowanie danych o globalnej dobroczynności",
-    "rateLimitedMarket": "Dane rynkowe tymczasowo niedostępne (limit zapytań) — ponowna próba wkrótce"
+    "all": "Wszystkie"
   }
 }

@@ -64,48 +64,7 @@
     "polymarket": "Voorspellingen",
     "climate": "Klimaatafwijkingen",
     "liveWebcams": "Live Webcams",
-    "securityAdvisories": "Veiligheidsadviezen",
-    "orefSirens": "Israel Sirens",
-    "telegramIntel": "Telegram Inlichtingen",
-    "giving": "Mondiale donaties",
-    "supplyChain": "Toeleveringsketen",
-    "gulfEconomies": "Golfeconomieën",
-    "gulfIndices": "Golfindices",
-    "gulfCurrencies": "Golfvaluta",
-    "gulfOil": "Golfolie"
-  },
-  "commands": {
-    "prefixes": {
-      "map": "Kaart",
-      "panel": "Paneel",
-      "brief": "Samenvatting"
-    },
-    "categories": {
-      "navigate": "Navigeren",
-      "layers": "Lagen",
-      "panels": "Panelen",
-      "view": "Weergave",
-      "actions": "Acties",
-      "country": "Land"
-    },
-    "regions": {
-      "global": "Globaal overzicht",
-      "mena": "Midden-Oosten & Noord-Afrika",
-      "eu": "Europa",
-      "asia": "Azië-Pacific",
-      "america": "Amerika",
-      "africa": "Afrika",
-      "latam": "Latijns-Amerika",
-      "oceania": "Oceanië"
-    },
-    "tips": {
-      "map": "Typ een landnaam om ernaartoe te vliegen op de kaart",
-      "panel": "Typ een paneelnaam om ernaartoe te scrollen",
-      "brief": "Typ een landnaam voor een inlichtingenbriefing",
-      "layers": "Typ \"military\" of \"finance\" voor laagpresets",
-      "time": "Typ \"1h\", \"24h\" of \"7d\" om te filteren op tijd",
-      "settings": "Typ \"dark mode\", \"settings\" of \"fullscreen\""
-    }
+    "securityAdvisories": "Veiligheidsadviezen"
   },
   "modals": {
     "search": {
@@ -1269,13 +1228,7 @@
       "regionLatinAmerica": "Latijns-Amerika",
       "regionAsia": "Azië",
       "regionMiddleEast": "Midden-Oosten",
-      "regionAfrica": "Afrika",
-      "regionOceania": "Oceanië",
-      "botCheck": "YouTube vraagt om in te loggen om {{name}} af te spelen",
-      "channelNotFound": "YouTube-kanaal niet gevonden",
-      "invalidHandle": "Voer een geldig YouTube-handle in (bijv. @Kanaalnaam)",
-      "signInToYouTube": "Inloggen bij YouTube",
-      "verifying": "Verifiëren…"
+      "regionAfrica": "Afrika"
     },
     "securityAdvisories": {
       "loading": "Reisadviezen laden...",
@@ -1298,69 +1251,6 @@
         "daysAgo": "{{count}} dagen geleden"
       },
       "infoTooltip": "<strong>Veiligheidsadviezen</strong><br>Reisadviezen en veiligheidswaarschuwingen van overheidsinstanties."
-    },
-    "orefSirens": {
-      "checking": "Checking siren alerts...",
-      "noAlerts": "No active sirens — all clear",
-      "notConfigured": "Sirens service not configured",
-      "activeSirens": "{{count}} active siren(s)",
-      "area": "Area",
-      "time": "Time",
-      "justNow": "just now",
-      "historyCount": "{{count}} alerts in last 24h",
-      "infoTooltip": "<strong>Israel Sirens</strong><br>Real-time rocket and missile siren alerts from Israel Home Front Command.<br><br>Data is polled every 10 seconds. A pulsing red indicator means active sirens are sounding.",
-      "historySummary": "{{count}} meldingen in 24u — {{waves}} golven",
-      "loadingHistory": "Geschiedenis laden..."
-    },
-    "breakingNews": {
-      "critical": "KRITIEK",
-      "dismiss": "Sluiten",
-      "enableNotifications": "Bureaubladmeldingen inschakelen",
-      "high": "HOOG"
-    },
-    "giving": {
-      "activityIndex": "Activiteitsindex",
-      "cafIndex": "CAF-index",
-      "candidGrants": "Candid-subsidies",
-      "category": "Categorie",
-      "cryptoDaily": "Crypto dagelijks",
-      "dailyInflow": "24u instroom",
-      "dailyVol": "Dagelijks vol.",
-      "dataLag": "Gegevensvertraging",
-      "estDailyFlow": "Gesch. dagelijkse stroom",
-      "freshness": "Gegevens",
-      "infoTooltip": "<strong>Mondiale donatieactiviteitsindex</strong> Samengestelde index die persoonlijke donaties volgt via crowdfundingplatforms en crypto-wallets.<ul><li><strong>Platforms</strong>: steekproef van GoFundMe-, GlobalGiving-, JustGiving-campagnes</li><li><strong>Crypto</strong>: on-chain instroom naar liefdadigheidwallets (Endaoment, Giving Block)</li><li><strong>Institutioneel</strong>: OESO-ODA, CAF World Giving Index, Candid-subsidies</li></ul>Index is richtinggevend (geen exacte bedragen). Combineert live steekproeven met gepubliceerde jaarverslagen.",
-      "oecdOda": "OESO-ODA",
-      "ofTotal": "% van totaal",
-      "platform": "Platform",
-      "share": "Aandeel",
-      "tabs": {
-        "categories": "Categorieën",
-        "crypto": "Crypto",
-        "institutional": "Institutioneel",
-        "platforms": "Platforms"
-      },
-      "topReceivers": "Topontvangers",
-      "trend": "Trend",
-      "trending": "TREND",
-      "velocity": "Snelheid",
-      "wallets": "Wallets"
-    },
-    "supplyChain": {
-      "chokepoints": "Knelpunten",
-      "fredKeyMissing": "FRED API-sleutel vereist voor verzendtarieven — voeg deze toe in Instellingen. Knelpunten en mineralen beschikbaar zonder sleutel.",
-      "mineral": "Mineraal",
-      "minerals": "Mineralen",
-      "noChokepoints": "Knelpuntgegevens worden geladen...",
-      "noMinerals": "Mineraalgegevens worden geladen...",
-      "noShipping": "Verzendtariefgegevens niet beschikbaar",
-      "risk": "Risico",
-      "shipping": "Scheepvaart",
-      "sources": "FRED / NGA / USGS",
-      "spikeAlert": "Piek gedetecteerd — tarief aanzienlijk boven 52-weeks gemiddelde (wekelijks)",
-      "topProducers": "Topproducenten",
-      "upstreamUnavailable": "Toeleveringsketengegevens tijdelijk niet beschikbaar — gecachete gegevens worden weergegeven",
-      "warnings": "waarschuwing(en)"
     }
   },
   "popups": {
@@ -2010,9 +1900,7 @@
     "currentVariant": "(huidig)",
     "retry": "Retry",
     "refresh": "Refresh",
-    "all": "Alle",
-    "loadingGiving": "Donatiegegevens laden...",
-    "rateLimitedMarket": "Marktgegevens tijdelijk beperkt — automatisch opnieuw proberen"
+    "all": "Alle"
   },
   "header": {
     "world": "WERELD",

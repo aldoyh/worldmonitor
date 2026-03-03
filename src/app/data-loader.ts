@@ -57,7 +57,7 @@ import {
   fetchChokepointStatus,
   fetchCriticalMinerals,
 } from '@/services';
-import { checkBatchForBreakingAlerts, dispatchOrefBreakingAlert } from '@/services/breaking-news-alerts';
+import { checkBatchForBreakingAlerts } from '@/services/breaking-news-alerts';
 import { mlWorker } from '@/services/ml-worker';
 import { clusterNewsHybrid } from '@/services/clustering';
 import { ingestProtests, ingestFlights, ingestVessels, ingestEarthquakes, detectGeoConvergence, geoConvergenceToSignal } from '@/services/geo-convergence';
@@ -73,19 +73,14 @@ import { fetchConflictEvents, fetchUcdpClassifications, fetchHapiSummary, fetchU
 import { fetchUnhcrPopulation } from '@/services/displacement';
 import { fetchClimateAnomalies } from '@/services/climate';
 import { fetchSecurityAdvisories } from '@/services/security-advisories';
-import { fetchTelegramFeed } from '@/services/telegram-intel';
-import { fetchOrefAlerts, startOrefPolling, stopOrefPolling, onOrefAlertsUpdate } from '@/services/oref-alerts';
 import { enrichEventsWithExposure } from '@/services/population-exposure';
 import { debounce, getCircuitBreakerCooldownInfo } from '@/utils';
 import { isFeatureAvailable, isFeatureEnabled } from '@/services/runtime-config';
 import { getAiFlowSettings } from '@/services/ai-flow-settings';
-import { t, getCurrentLanguage } from '@/services/i18n';
+import { t } from '@/services/i18n';
 import { getHydratedData } from '@/services/bootstrap';
-import { canQueueAiClassification, AI_CLASSIFY_MAX_PER_FEED } from '@/services/ai-classify-queue';
-import { classifyWithAI } from '@/services/threat-classifier';
-import { ingestHeadlines } from '@/services/trending-keywords';
-import type { ListFeedDigestResponse } from '@/generated/client/worldmonitor/news/v1/service_client';
-import type { GetSectorSummaryResponse, ListMarketQuotesResponse } from '@/generated/client/worldmonitor/market/v1/service_client';
+import type { GetSectorSummaryResponse } from '@/generated/client/worldmonitor/market/v1/service_client';
+import { maybeShowDownloadBanner } from '@/components/DownloadBanner';
 import { mountCommunityWidget } from '@/components/CommunityWidget';
 import { ResearchServiceClient } from '@/generated/client/worldmonitor/research/v1/service_client';
 import {
@@ -107,8 +102,6 @@ import {
   TradePolicyPanel,
   SupplyChainPanel,
   SecurityAdvisoriesPanel,
-  OrefSirensPanel,
-  TelegramIntelPanel,
 } from '@/components';
 import { SatelliteFiresPanel } from '@/components/SatelliteFiresPanel';
 import { classifyNewsItem } from '@/services/positive-classifier';
@@ -358,7 +351,7 @@ export class DataLoaderManager implements AppModule {
     if (SITE_VARIANT !== 'happy' && this.ctx.mapLayers.cables) tasks.push({ name: 'cableHealth', task: runGuarded('cableHealth', () => this.loadCableHealth()) });
     if (SITE_VARIANT !== 'happy' && this.ctx.mapLayers.flights) tasks.push({ name: 'flights', task: runGuarded('flights', () => this.loadFlightDelays()) });
     if (SITE_VARIANT !== 'happy' && CYBER_LAYER_ENABLED && this.ctx.mapLayers.cyberThreats) tasks.push({ name: 'cyberThreats', task: runGuarded('cyberThreats', () => this.loadCyberThreats()) });
-    if (SITE_VARIANT !== 'happy') tasks.push({ name: 'iranAttacks', task: runGuarded('iranAttacks', () => this.loadIranEvents()) });
+    if (SITE_VARIANT !== 'happy' && this.ctx.mapLayers.iranAttacks) tasks.push({ name: 'iranAttacks', task: runGuarded('iranAttacks', () => this.loadIranEvents()) });
     if (SITE_VARIANT !== 'happy' && (this.ctx.mapLayers.techEvents || SITE_VARIANT === 'tech')) tasks.push({ name: 'techEvents', task: runGuarded('techEvents', () => this.loadTechEvents()) });
 
     if (SITE_VARIANT === 'tech') {
@@ -837,10 +830,11 @@ export class DataLoaderManager implements AppModule {
         collectedNews.push(...intel);
         this.flashMapForNews(intel);
       } else {
-        const staleIntel = this.getStaleNewsItems('intel').filter(i => enabledIntelNames.has(i.source));
-        if (staleIntel.length > 0) {
-          console.warn(`[News] Intel digest missing, serving stale headlines (${staleIntel.length})`);
-          this.renderNewsForCategory('intel', staleIntel);
+        const intelResult = await Promise.allSettled([fetchCategoryFeeds(enabledIntelSources)]);
+        if (intelResult[0]?.status === 'fulfilled') {
+          const intel = intelResult[0].value;
+          checkBatchForBreakingAlerts(intel);
+          this.renderNewsForCategory('intel', intel);
           if (intelPanel) {
             try {
               const baseline = await updateBaseline('news:intel', staleIntel.length);
@@ -982,27 +976,25 @@ export class DataLoaderManager implements AppModule {
         this.ctx.statusPanel?.updateApi('Finnhub', { status: 'ok' });
       }
 
-      // Sector heatmap: always attempt loading regardless of market rate-limit status
-      const hydratedSectors = getHydratedData('sectors') as GetSectorSummaryResponse | undefined;
-      if (hydratedSectors?.sectors?.length) {
-        const mapped = hydratedSectors.sectors.map((s) => ({ name: s.name, change: s.change }));
-        (this.ctx.panels['heatmap'] as HeatmapPanel).renderHeatmap(mapped);
-      } else if (!stocksResult.skipped) {
-        const sectorsResult = await fetchMultipleStocks(
-          SECTORS.map((s) => ({ ...s, display: s.name })),
-          {
-            onBatch: (partialSectors) => {
-              (this.ctx.panels['heatmap'] as HeatmapPanel).renderHeatmap(
-                partialSectors.map((s) => ({ name: s.name, change: s.change }))
-              );
-            },
-          }
-        );
-        (this.ctx.panels['heatmap'] as HeatmapPanel).renderHeatmap(
-          sectorsResult.data.map((s) => ({ name: s.name, change: s.change }))
-        );
-      } else {
-        this.ctx.panels['heatmap']?.showConfigError(finnhubConfigMsg);
+        const hydratedSectors = getHydratedData('sectors') as GetSectorSummaryResponse | undefined;
+        if (hydratedSectors?.sectors?.length) {
+          const mapped = hydratedSectors.sectors.map((s) => ({ name: s.name, change: s.change }));
+          (this.ctx.panels['heatmap'] as HeatmapPanel).renderHeatmap(mapped);
+        } else {
+          const sectorsResult = await fetchMultipleStocks(
+            SECTORS.map((s) => ({ ...s, display: s.name })),
+            {
+              onBatch: (partialSectors) => {
+                (this.ctx.panels['heatmap'] as HeatmapPanel).renderHeatmap(
+                  partialSectors.map((s) => ({ name: s.name, change: s.change }))
+                );
+              },
+            }
+          );
+          (this.ctx.panels['heatmap'] as HeatmapPanel).renderHeatmap(
+            sectorsResult.data.map((s) => ({ name: s.name, change: s.change }))
+          );
+        }
       }
 
       const commoditiesPanel = this.ctx.panels['commodities'] as CommoditiesPanel;
@@ -1406,56 +1398,6 @@ export class DataLoaderManager implements AppModule {
     // Security advisories
     tasks.push(this.loadSecurityAdvisories());
 
-    // Telegram Intel
-    tasks.push(this.loadTelegramIntel());
-
-    // OREF sirens
-    tasks.push((async () => {
-      try {
-        const data = await fetchOrefAlerts();
-        (this.ctx.panels['oref-sirens'] as OrefSirensPanel)?.setData(data);
-        const alertCount = data.alerts?.length ?? 0;
-        const historyCount24h = data.historyCount24h ?? 0;
-        ingestOrefForCII(alertCount, historyCount24h);
-        this.ctx.intelligenceCache.orefAlerts = { alertCount, historyCount24h };
-        if (data.alerts?.length) dispatchOrefBreakingAlert(data.alerts);
-        onOrefAlertsUpdate((update) => {
-          (this.ctx.panels['oref-sirens'] as OrefSirensPanel)?.setData(update);
-          const updAlerts = update.alerts?.length ?? 0;
-          const updHistory = update.historyCount24h ?? 0;
-          ingestOrefForCII(updAlerts, updHistory);
-          this.ctx.intelligenceCache.orefAlerts = { alertCount: updAlerts, historyCount24h: updHistory };
-          if (update.alerts?.length) dispatchOrefBreakingAlert(update.alerts);
-        });
-        startOrefPolling();
-      } catch (error) {
-        console.error('[Intelligence] OREF alerts fetch failed:', error);
-      }
-    })());
-
-    // GPS/GNSS jamming
-    tasks.push((async () => {
-      try {
-        const data = await fetchGpsInterference();
-        if (!data) {
-          ingestGpsJammingForCII([]);
-          this.ctx.map?.setLayerReady('gpsJamming', false);
-          return;
-        }
-        ingestGpsJammingForCII(data.hexes);
-        if (this.ctx.mapLayers.gpsJamming) {
-          this.ctx.map?.setGpsJamming(data.hexes);
-          this.ctx.map?.setLayerReady('gpsJamming', data.hexes.length > 0);
-        }
-        this.ctx.statusPanel?.updateFeed('GPS Jam', { status: 'ok', itemCount: data.hexes.length });
-        dataFreshness.recordUpdate('gpsjam', data.hexes.length);
-      } catch (error) {
-        this.ctx.map?.setLayerReady('gpsJamming', false);
-        this.ctx.statusPanel?.updateFeed('GPS Jam', { status: 'error' });
-        dataFreshness.recordError('gpsjam', String(error));
-      }
-    })());
-
     await Promise.allSettled(tasks);
 
     try {
@@ -1548,13 +1490,8 @@ export class DataLoaderManager implements AppModule {
   async loadIranEvents(): Promise<void> {
     try {
       const events = await fetchIranEvents();
-      this.ctx.intelligenceCache.iranEvents = events;
       this.ctx.map?.setIranEvents(events);
       this.ctx.map?.setLayerReady('iranAttacks', events.length > 0);
-      const coerced = events.map(e => ({ ...e, timestamp: Number(e.timestamp) || 0 }));
-      signalAggregator.ingestConflictEvents(coerced);
-      ingestStrikesForCII(coerced);
-      this.refreshCiiAndBrief();
     } catch {
       this.ctx.map?.setLayerReady('iranAttacks', false);
     }
@@ -2318,20 +2255,9 @@ export class DataLoaderManager implements AppModule {
       const result = await fetchSecurityAdvisories();
       if (result.ok) {
         (this.ctx.panels['security-advisories'] as SecurityAdvisoriesPanel)?.setData(result.advisories);
-        this.ctx.intelligenceCache.advisories = result.advisories;
-        ingestAdvisoriesForCII(result.advisories);
       }
     } catch (error) {
       console.error('[App] Security advisories fetch failed:', error);
-    }
-  }
-
-  async loadTelegramIntel(): Promise<void> {
-    try {
-      const result = await fetchTelegramFeed();
-      (this.ctx.panels['telegram-intel'] as TelegramIntelPanel)?.setData(result);
-    } catch (error) {
-      console.error('[App] Telegram intel fetch failed:', error);
     }
   }
 }
