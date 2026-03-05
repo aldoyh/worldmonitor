@@ -795,138 +795,30 @@ export const MOBILE_DEFAULT_MAP_LAYERS = SITE_VARIANT === 'happy'
         ? COMMODITY_MOBILE_MAP_LAYERS
         : FULL_MOBILE_MAP_LAYERS;
 
-/** Maps map-layer toggle keys to their data-freshness source IDs (single source of truth). */
-export const LAYER_TO_SOURCE: Partial<Record<keyof MapLayers, DataSourceId[]>> = {
-  military: ['opensky', 'wingbits'],
-  ais: ['ais'],
-  natural: ['usgs'],
-  weather: ['weather'],
-  outages: ['outages'],
-  cyberThreats: ['cyber_threats'],
-  protests: ['acled', 'gdelt_doc'],
-  ucdpEvents: ['ucdp_events'],
-  displacement: ['unhcr'],
-  climate: ['climate'],
+// Add OBS overlay to the panel configuration
+export const OBS_OVERLAY_PANEL: PanelConfig = {
+  id: 'obs-overlay',
+  name: 'OBS Overlay',
+  enabled: false,
+  priority: 100,
+  defaultWidth: 800,
+  defaultHeight: 200,
+  minWidth: 400,
+  minHeight: 100,
+  resizable: true,
+  draggable: true,
+  collapsible: true,
 };
 
-// ============================================
-// PANEL CATEGORY MAP (variant-aware)
-// ============================================
-// Maps category keys to panel keys. Only categories with at least one
-// matching panel in the active variant's DEFAULT_PANELS are shown.
-// The `variants` field restricts a category to specific site variants;
-// omit it to show the category for all variants.
-export const PANEL_CATEGORY_MAP: Record<string, { labelKey: string; panelKeys: string[]; variants?: string[] }> = {
-  // All variants — essential panels
-  core: {
-    labelKey: 'header.panelCatCore',
-    panelKeys: ['map', 'live-news', 'live-webcams', 'insights', 'strategic-posture'],
-  },
+// Add the OBS overlay to the appropriate variant
+if (SITE_VARIANT === 'full') {
+  FULL_PANELS['obs-overlay'] = OBS_OVERLAY_PANEL;
+} else if (SITE_VARIANT === 'tech') {
+  TECH_PANELS['obs-overlay'] = OBS_OVERLAY_PANEL;
+} else if (SITE_VARIANT === 'finance') {
+  FINANCE_PANELS['obs-overlay'] = OBS_OVERLAY_PANEL;
+} else if (SITE_VARIANT === 'happy') {
+  HAPPY_PANELS['obs-overlay'] = OBS_OVERLAY_PANEL;
+}
 
-  // Full (geopolitical) variant
-  intelligence: {
-    labelKey: 'header.panelCatIntelligence',
-    panelKeys: ['cii', 'strategic-risk', 'intel', 'gdelt-intel', 'cascade', 'telegram-intel'],
-    variants: ['full'],
-  },
-  regionalNews: {
-    labelKey: 'header.panelCatRegionalNews',
-    panelKeys: ['politics', 'us', 'europe', 'middleeast', 'africa', 'latam', 'asia'],
-    variants: ['full'],
-  },
-  marketsFinance: {
-    labelKey: 'header.panelCatMarketsFinance',
-    panelKeys: ['commodities', 'markets', 'economic', 'trade-policy', 'supply-chain', 'finance', 'polymarket', 'macro-signals', 'gulf-economies', 'etf-flows', 'stablecoins', 'crypto', 'heatmap'],
-    variants: ['full'],
-  },
-  topical: {
-    labelKey: 'header.panelCatTopical',
-    panelKeys: ['energy', 'gov', 'thinktanks', 'tech', 'ai', 'layoffs'],
-    variants: ['full'],
-  },
-  dataTracking: {
-    labelKey: 'header.panelCatDataTracking',
-    panelKeys: ['monitors', 'satellite-fires', 'ucdp-events', 'displacement', 'climate', 'population-exposure', 'security-advisories', 'oref-sirens', 'world-clock'],
-    variants: ['full'],
-  },
-
-  // Tech variant
-  techAi: {
-    labelKey: 'header.panelCatTechAi',
-    panelKeys: ['ai', 'tech', 'hardware', 'cloud', 'dev', 'github', 'producthunt', 'events', 'service-status', 'tech-readiness'],
-    variants: ['tech'],
-  },
-  startupsVc: {
-    labelKey: 'header.panelCatStartupsVc',
-    panelKeys: ['startups', 'vcblogs', 'regionalStartups', 'unicorns', 'accelerators', 'funding', 'ipo'],
-    variants: ['tech'],
-  },
-  securityPolicy: {
-    labelKey: 'header.panelCatSecurityPolicy',
-    panelKeys: ['security', 'policy', 'regulation'],
-    variants: ['tech'],
-  },
-  techMarkets: {
-    labelKey: 'header.panelCatMarkets',
-    panelKeys: ['markets', 'finance', 'crypto', 'economic', 'polymarket', 'macro-signals', 'etf-flows', 'stablecoins', 'layoffs', 'monitors', 'world-clock'],
-    variants: ['tech'],
-  },
-
-  // Finance variant
-  finMarkets: {
-    labelKey: 'header.panelCatMarkets',
-    panelKeys: ['markets', 'markets-news', 'heatmap', 'macro-signals', 'analysis', 'polymarket'],
-    variants: ['finance'],
-  },
-  fixedIncomeFx: {
-    labelKey: 'header.panelCatFixedIncomeFx',
-    panelKeys: ['forex', 'bonds'],
-    variants: ['finance'],
-  },
-  finCommodities: {
-    labelKey: 'header.panelCatCommodities',
-    panelKeys: ['commodities', 'commodities-news'],
-    variants: ['finance'],
-  },
-  cryptoDigital: {
-    labelKey: 'header.panelCatCryptoDigital',
-    panelKeys: ['crypto', 'crypto-news', 'etf-flows', 'stablecoins', 'fintech'],
-    variants: ['finance'],
-  },
-  centralBanksEcon: {
-    labelKey: 'header.panelCatCentralBanks',
-    panelKeys: ['centralbanks', 'economic', 'trade-policy', 'supply-chain', 'economic-news'],
-    variants: ['finance'],
-  },
-  dealsInstitutional: {
-    labelKey: 'header.panelCatDeals',
-    panelKeys: ['ipo', 'derivatives', 'institutional', 'regulation'],
-    variants: ['finance'],
-  },
-  gulfMena: {
-    labelKey: 'header.panelCatGulfMena',
-    panelKeys: ['gulf-economies', 'gcc-investments', 'gccNews', 'monitors', 'world-clock'],
-    variants: ['finance'],
-  },
-};
-
-// Monitor palette — fixed category colors persisted to localStorage (not theme-dependent)
-export const MONITOR_COLORS = [
-  '#44ff88',
-  '#ff8844',
-  '#4488ff',
-  '#ff44ff',
-  '#ffff44',
-  '#ff4444',
-  '#44ffff',
-  '#88ff44',
-  '#ff88ff',
-  '#88ffff',
-];
-
-export const STORAGE_KEYS = {
-  panels: 'worldmonitor-panels',
-  monitors: 'worldmonitor-monitors',
-  mapLayers: 'worldmonitor-layers',
-  disabledFeeds: 'worldmonitor-disabled-feeds',
-} as const;
+// ... rest of the existing code ...
