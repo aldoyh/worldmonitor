@@ -51,7 +51,7 @@
       "cable": "Undersea Cables",
       "datacenter": "Data Centers",
       "base": "Military Bases",
-      "nuclear": "Nuclear Facilities",
+      "nuclear": "Nearby Nuclear",
       "port": "Ports"
     },
     "levels": {
@@ -1587,7 +1587,8 @@
       "openSettings": "Open Settings"
     },
     "languageSelector": {
-      "selectLanguage": "Select Language"
+      "selectLanguage": "Select Language",
+      "mapLabelsFallbackVi": "Map labels currently fall back to English for Vietnamese."
     },
     "serviceStatus": {
       "checkingServices": "Checking services...",
@@ -2335,4 +2336,3 @@
     "all": "All"
   }
 }
-
