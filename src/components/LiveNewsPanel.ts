@@ -59,7 +59,6 @@ export interface LiveChannel {
   geoAvailability?: string[]; // ISO 3166-1 alpha-2 codes; undefined = available everywhere
 }
 
-
 // Full variant: World news channels (24/7 live streams)
 const FULL_LIVE_CHANNELS: LiveChannel[] = [
   { id: 'bloomberg', name: 'Bloomberg', handle: '@markets', fallbackVideoId: 'iEpJwprxDdk' },
@@ -525,7 +524,6 @@ export class LiveNewsPanel extends Panel {
     return fallbackOrigin;
   }
 
-
   private applyIdleMode(): void {
     if (this.alwaysOn) {
       if (this.idleTimeout) {
@@ -746,10 +744,6 @@ export class LiveNewsPanel extends Panel {
     this.isMuted = !this.isMuted;
     this.updateMuteIcon();
     this.syncPlayerState();
-  }
-
-  private getChannelDisplayName(channel: LiveChannel): string {
-    return channel.hlsUrl && !channel.handle ? `${channel.name} 🔗` : channel.name;
   }
 
   /** Creates a single channel tab button with click and drag handlers. */
