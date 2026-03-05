@@ -60,6 +60,7 @@ function parseYouTubeInput(raw: string): { handle: string } | { videoId: string 
 function isHlsUrl(raw: string): boolean {
   try {
     const url = new URL(raw);
+    if (url.protocol !== 'https:' && url.protocol !== 'http:') return false;
     return url.pathname.endsWith('.m3u8') || raw.includes('.m3u8');
   } catch {
     return false;
