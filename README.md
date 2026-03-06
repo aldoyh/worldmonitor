@@ -69,6 +69,7 @@ All five variants run from a single codebase — switch between them with one cl
 ## Key Features
 
 ### Maps & Visualization
+
 - **Dual Map Engine** — 3D globe (globe.gl + Three.js) and WebGL flat map (deck.gl), runtime-switchable with 45 shared data layers. [Details →](./docs/MAP_ENGINE.md)
 - **45 toggleable data layers** — conflicts, bases, cables, pipelines, flights, vessels, protests, fires, earthquakes, datacenters, and more across all variants
 - **8 regional presets** — Global, Americas, Europe, MENA, Asia, Africa, Oceania, Latin America with time filtering (1h–7d)
@@ -76,6 +77,7 @@ All five variants run from a single codebase — switch between them with one cl
 - **URL state sharing** — map center, zoom, active layers, and time range encoded in shareable URLs
 
 ### AI & Intelligence
+
 - **World Brief** — LLM-synthesized summary with 4-tier fallback: Ollama (local) → Groq → OpenRouter → browser T5. [Details →](./docs/AI_INTELLIGENCE.md)
 - **AI Deduction & Forecasting** — free-text geopolitical analysis grounded in live headlines. [Details →](./docs/AI_INTELLIGENCE.md#ai-deduction--forecasting)
 - **Headline Memory (RAG)** — opt-in browser-local semantic index using ONNX embeddings in IndexedDB. [Details →](./docs/AI_INTELLIGENCE.md#client-side-headline-memory-rag)
@@ -121,12 +123,14 @@ All five variants run from a single codebase — switch between them with one cl
 </details>
 
 ### Live News & Video
+
 - **435+ RSS feeds** across geopolitics, defense, energy, tech, and finance with server-side aggregation (95% fewer edge invocations). [Details →](./docs/DATA_SOURCES.md#server-side-aggregation)
 - **30+ live video streams** — Bloomberg, Sky News, Al Jazeera, and more with HLS native streaming, idle-aware playback, and fullscreen mode
 - **22 live webcams** — geopolitical hotspot streams across 5 regions with Iran/Attacks dedicated tab
 - **Custom keyword monitors** — user-defined alerts with word-boundary matching and auto-coloring
 
 ### Scoring & Detection
+
 - **Country Instability Index (CII)** — real-time stability scores using weighted multi-signal blend across 23 tier-1 nations + universal scoring for all countries. [Details →](./docs/ALGORITHMS.md#country-instability-index-cii)
 - **Hotspot Escalation** — dynamic scoring blending news activity, CII, geo-convergence, and military signals. [Details →](./docs/ALGORITHMS.md#hotspot-escalation-scoring)
 - **Strategic Risk Score** — composite geopolitical risk from convergence, CII, infrastructure, theater, and breaking news. [Details →](./docs/ALGORITHMS.md#strategic-risk-score-algorithm)
@@ -134,6 +138,7 @@ All five variants run from a single codebase — switch between them with one cl
 - **Cross-Stream Correlation** — 14 signal types detecting patterns across news, markets, military, and predictions. [Details →](./docs/ALGORITHMS.md#cross-stream-correlation-engine)
 
 ### Finance & Markets
+
 - **Macro Signal Analysis** — 7-signal market radar with composite BUY/CASH verdict. [Details →](./docs/FINANCE_DATA.md#macro-signal-analysis-market-radar)
 - **Gulf FDI** — 64 Saudi/UAE investments plotted globally. [Details →](./docs/FINANCE_DATA.md#gulf-fdi-investment-database)
 - **Stablecoin & BTC ETF** — peg health monitoring and spot ETF flow tracking. [Details →](./docs/FINANCE_DATA.md)
@@ -141,12 +146,14 @@ All five variants run from a single codebase — switch between them with one cl
 - **BIS & WTO** — central bank rates, trade policy intelligence. [Details →](./docs/FINANCE_DATA.md)
 
 ### Desktop & Mobile
+
 - **Native desktop app** (Tauri) — macOS, Windows, Linux with OS keychain, local sidecar, and cloud fallback. [Details →](./docs/DESKTOP_APP.md)
 - **Progressive Web App** — installable with offline map support (CacheFirst tiles, 500-tile cap)
 - **Mobile-optimized map** — touch pan with inertia, pinch-to-zoom, bottom-sheet popups, GPS centering
 - **Responsive layout** — ultra-wide L-shaped layout on 2000px+, collapsible panels, mobile search sheet
 
 ### Platform Features
+
 - **21 languages** — lazy-loaded bundles with native-language RSS feeds, AI translation, and RTL support
 - **Cmd+K command palette** — fuzzy search across 24 result types, layer presets, ~250 country commands
 - **Proto-first API contracts** — 92 proto files, 22 services, auto-generated TypeScript + OpenAPI docs
@@ -499,7 +506,40 @@ If you find World Monitor useful:
 
 ## License
 
-GNU Affero General Public License v3.0 (AGPL-3.0) — see [LICENSE](LICENSE) for details.
+This project is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)** — see [LICENSE](LICENSE) for the full text.
+
+### What This Means
+
+**You are free to:**
+
+- **Use** — run World Monitor for any purpose, including commercial use
+- **Study** — read, audit, and learn from the source code
+- **Modify** — adapt, extend, and build upon the code
+- **Distribute** — share copies with anyone
+
+**Under these conditions:**
+
+- **Source code disclosure** — if you distribute or modify this software, you **must** make the complete source code available under the same AGPL-3.0 license
+- **Network use is distribution** — if you run a modified version as a network service (SaaS, web app, API), you **must** provide the source code to all users who interact with it over the network. This is the key difference from GPL-3.0 — you cannot run a modified version behind a server without sharing the source
+- **Same license (copyleft)** — any derivative work must be released under AGPL-3.0. You cannot re-license under a proprietary or more permissive license
+- **Attribution** — you must retain all copyright notices, give appropriate credit to the original author, and clearly indicate any changes you made
+- **State changes** — modified files must carry prominent notices stating that you changed them, with the date of the change
+- **No additional restrictions** — you may not impose any further restrictions on the rights granted by this license (e.g., no DRM, no additional terms)
+
+**In plain terms:**
+
+| Use Case | Allowed? | Condition |
+|----------|----------|-----------|
+| Personal / internal use | Yes | No conditions |
+| Self-hosted deployment | Yes | No conditions if unmodified |
+| Forking & modifying | Yes | Must share source under AGPL-3.0 |
+| Commercial use | Yes | Must share source under AGPL-3.0 |
+| Running as a SaaS/web service | Yes | Must share source under AGPL-3.0 |
+| Bundling into a proprietary product | No | AGPL-3.0 copyleft prevents this |
+
+**No warranty** — the software is provided "as is" without warranty of any kind.
+
+Copyright (C) 2024-2026 Elie Habib. All rights reserved under AGPL-3.0.
 
 ---
 
@@ -521,7 +561,7 @@ GNU Affero General Public License v3.0 (AGPL-3.0) — see [LICENSE](LICENSE) for
 
 We thank the following researchers for responsibly disclosing security issues:
 
-- **Cody Richard** — Disclosed three security findings covering IPC command exposure via DevTools in production builds, renderer-to-sidecar trust boundary analysis, and the global fetch patch credential injection architecture (2025)
+- **Cody Richard** — Disclosed three security findings covering IPC command exposure via DevTools in production builds, renderer-to-sidecar trust boundary analysis, and the global fetch patch credential injection architecture (2026)
 
 If you discover a vulnerability, please see our [Security Policy](./SECURITY.md) for responsible disclosure guidelines.
 
