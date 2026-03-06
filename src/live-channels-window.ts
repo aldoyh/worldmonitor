@@ -96,6 +96,14 @@ export async function initLiveChannelsWindow(containerEl?: HTMLElement): Promise
     return;
   }
 
+  if (document.getElementById('liveChannelsList')) {
+    // Already initialized, just update the list
+    channels = loadChannelsFromStorage();
+    const listEl = document.getElementById('liveChannelsList') as HTMLElement;
+    renderList(listEl);
+    return;
+  }
+
   if (!containerEl) {
     document.title = `${t('components.liveNews.manage') ?? 'Channel management'} - World Monitor`;
   }
