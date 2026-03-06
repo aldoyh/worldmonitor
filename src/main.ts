@@ -311,7 +311,6 @@ if (urlParams.get('settings') === '1') {
           obsOverlay.toggleVisibility();
         }
       });
-
       clearChunkReloadGuard(chunkReloadStorageKey);
     })
     .catch(console.error);
