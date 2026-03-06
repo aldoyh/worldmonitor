@@ -63,7 +63,6 @@ function parseYouTubeInput(raw: string): { handle: string } | { videoId: string 
 function isHlsUrl(raw: string): boolean {
   try {
     const url = new URL(raw);
-    if (url.protocol !== 'https:' && url.protocol !== 'http:') return false;
     return url.pathname.endsWith('.m3u8') || raw.includes('.m3u8');
   } catch {
     return false;
@@ -88,6 +87,14 @@ export async function initLiveChannelsWindow(containerEl?: HTMLElement): Promise
   for (const c of filteredChannels) optionalChannelMap.set(c.id, c);
 
   let channels: LiveChannel[] = [];
+
+  if (document.getElementById('liveChannelsList')) {
+    // Already initialized, just update the list
+    channels = loadChannelsFromStorage();
+    const listEl = document.getElementById('liveChannelsList') as HTMLElement;
+    renderList(listEl);
+    return;
+  }
 
   if (document.getElementById('liveChannelsList')) {
     // Already initialized, just update the list
@@ -511,7 +518,7 @@ export async function initLiveChannelsWindow(containerEl?: HTMLElement): Promise
       }
 
       // Create custom HLS channel
-      const id = `custom-hls-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
+      const id = `custom-hls-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
       if (channels.some((c) => c.id === id)) return;
 
       const name = nameInput?.value?.trim() || 'HLS Stream';
