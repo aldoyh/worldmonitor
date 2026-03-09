@@ -59,7 +59,6 @@ export interface LiveChannel {
   geoAvailability?: string[]; // ISO 3166-1 alpha-2 codes; undefined = available everywhere
 }
 
-
 // Full variant: World news channels (24/7 live streams)
 const FULL_LIVE_CHANNELS: LiveChannel[] = [
   { id: 'bloomberg', name: 'Bloomberg', handle: '@markets', fallbackVideoId: 'iEpJwprxDdk' },
@@ -391,7 +390,9 @@ export class LiveNewsPanel extends Panel {
 
     const label = document.createElement('div');
     label.style.cssText = 'color:var(--text-secondary);font-size:13px;';
-    label.textContent = this.getChannelDisplayName(this.activeChannel);
+    // Add HLS indicator for custom HLS streams
+    const displayName = this.activeChannel.hlsUrl && !this.activeChannel.handle ? `${this.activeChannel.name} 🔗` : this.activeChannel.name;
+    label.textContent = displayName;
 
     const playBtn = document.createElement('button');
     playBtn.className = 'offline-retry';
@@ -522,7 +523,6 @@ export class LiveNewsPanel extends Panel {
     }
     return fallbackOrigin;
   }
-
 
   private applyIdleMode(): void {
     if (this.alwaysOn) {
@@ -746,17 +746,15 @@ export class LiveNewsPanel extends Panel {
     this.syncPlayerState();
   }
 
-  private getChannelDisplayName(channel: LiveChannel): string {
-    return channel.hlsUrl && !channel.handle ? `${channel.name} 🔗` : channel.name;
-  }
-
   /** Creates a single channel tab button with click and drag handlers. */
   private createChannelButton(channel: LiveChannel): HTMLButtonElement {
     const btn = document.createElement('button');
     btn.className = `live-channel-btn ${channel.id === this.activeChannel.id ? 'active' : ''}`;
     btn.dataset.channelId = channel.id;
 
-    btn.textContent = this.getChannelDisplayName(channel);
+    // Add HLS indicator for custom HLS streams (no handle, has hlsUrl)
+    const displayName = channel.hlsUrl && !channel.handle ? `${channel.name} 🔗` : channel.name;
+    btn.textContent = displayName;
 
     btn.style.cursor = 'grab';
     btn.addEventListener('click', (e) => {
@@ -933,6 +931,7 @@ export class LiveNewsPanel extends Panel {
     if (!channel.handle) {
       channel.videoId = channel.fallbackVideoId;
       channel.isLive = false;
+      channel.hlsUrl = undefined;
       return;
     }
 

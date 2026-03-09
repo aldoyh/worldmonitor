@@ -1,9 +1,11 @@
 import './styles/base-layer.css';
 import './styles/happy-theme.css';
+import './styles/obs-overlay.css';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import * as Sentry from '@sentry/browser';
 import { inject } from '@vercel/analytics';
 import { App } from './App';
+import { ObsOverlay } from './components/ObsOverlay';
 
 const sentryDsn = import.meta.env.VITE_SENTRY_DSN?.trim();
 
@@ -182,23 +184,6 @@ Sentry.init({
     /Cannot read properties of null \(reading '__uv'\)/,
     /Can't find variable: p\d+/,
     /^timeout$/,
-    /Can't find variable: caches/,
-    /crypto\.randomUUID is not a function/,
-    /ucapi is not defined/,
-    /Identifier '(?:script|reportPage)' has already been declared/,
-    /getAttribute is not a function.*getAttribute\("role"\)/,
-    /^TypeError: Internal error$/,
-    /SCDynimacBridge/,
-    /errTimes is not defined/,
-    /Failed to get ServiceWorkerRegistration/,
-    /^ReferenceError: Cannot access uninitialized variable\.?$/,
-    /Failed writing data to the file system/,
-    /Error invoking initializeCallbackHandler/,
-    /releasePointerCapture.*Invalid pointer/,
-    /Array buffer allocation failed/,
-    /Client can't handle this message/,
-    /Invalid LngLat object/,
-    /autoReset/,
   ],
   beforeSend(event) {
     const msg = event.exception?.values?.[0]?.value ?? '';
@@ -310,6 +295,23 @@ if (urlParams.get('settings') === '1') {
   app
     .init()
     .then(() => {
+      const obsOverlay = new ObsOverlay();
+      document.body.appendChild(obsOverlay.element);
+
+      document.addEventListener('keydown', (e) => {
+        if (!e.ctrlKey || !e.shiftKey || e.key.toLowerCase() !== 'o') return;
+        const target = e.target as HTMLElement | null;
+        const isTyping = target && (
+          target.tagName === 'INPUT'
+          || target.tagName === 'TEXTAREA'
+          || target.isContentEditable
+        );
+        if (!isTyping) {
+          e.preventDefault();
+          obsOverlay.toggleVisibility();
+        }
+      });
+
       clearChunkReloadGuard(chunkReloadStorageKey);
     })
     .catch(console.error);
