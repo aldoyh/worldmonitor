@@ -722,9 +722,9 @@ export default defineConfig({
     },
   },
   build: {
-    // Geospatial bundles (maplibre/deck) are expected to be large even when split.
-    // Raise warning threshold to reduce noisy false alarms in CI.
-    chunkSizeWarningLimit: 1200,
+    // Desktop bundles include heavier native-like visualization stacks.
+    // Keep web strict while reducing desktop-only false positive warnings.
+    chunkSizeWarningLimit: isDesktopBuild ? 1900 : 1200,
     rollupOptions: {
       onwarn(warning, warn) {
         // onnxruntime-web ships a minified browser bundle that intentionally uses eval.
@@ -753,6 +753,26 @@ export default defineConfig({
             if (id.includes('/onnxruntime-web/')) {
               return 'onnxruntime';
             }
+            if (
+              id.includes('/three/examples/')
+            ) {
+              return 'three-examples';
+            }
+            if (
+              id.includes('/three/')
+            ) {
+              return 'three-core';
+            }
+            if (
+              id.includes('/three-globe/')
+              || id.includes('/globe.gl/')
+              || id.includes('/three-render-objects/')
+              || id.includes('/three-conic-polygon-geometry/')
+              || id.includes('/three-geojson-geometry/')
+              || id.includes('/three-slippy-map-globe/')
+            ) {
+              return 'three-globe';
+            }
             if (id.includes('/maplibre-gl/') || id.includes('/pmtiles/') || id.includes('/@protomaps/basemaps/')) {
               return 'maplibre';
             }
@@ -771,6 +791,12 @@ export default defineConfig({
             if (id.includes('/topojson-client/')) {
               return 'topojson';
             }
+            if (id.includes('/marked/')) {
+              return 'markdown';
+            }
+            if (id.includes('/papaparse/')) {
+              return 'csv';
+            }
             if (id.includes('/i18next')) {
               return 'i18n';
             }
@@ -779,6 +805,9 @@ export default defineConfig({
             }
           }
           if (id.includes('/src/components/') && id.endsWith('Panel.ts')) {
+            if (id.endsWith('/Panel.ts')) {
+              return undefined;
+            }
             return 'panels';
           }
           // Give lazy-loaded locale chunks a recognizable prefix so the
