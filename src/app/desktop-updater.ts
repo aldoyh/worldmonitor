@@ -127,7 +127,7 @@ export class DesktopUpdater implements AppModule {
       .replace('arm64', 'aarch64');
 
     if (normalizedOs === 'windows') {
-      return normalizedArch === 'x86_64' ? 'windows-msi' : null;
+      return normalizedArch === 'x86_64' ? 'windows-exe' : null;
     }
 
     if (normalizedOs === 'macos' || normalizedOs === 'darwin') {
@@ -137,8 +137,6 @@ export class DesktopUpdater implements AppModule {
     }
 
     if (normalizedOs === 'linux') {
-      if (normalizedArch === 'x86_64') return 'linux-appimage';
-      if (normalizedArch === 'aarch64') return 'linux-appimage-arm64';
       return null;
     }
 
